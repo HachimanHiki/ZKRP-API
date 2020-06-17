@@ -39,11 +39,6 @@ type Verify struct {
 	ProvePackages []ProvePackage `json:"provePackages"`
 }
 
-
-type EventName struct {
-	Name string `json:"name" example:"marathon"`
-}
-
 type Event struct {
 	EventName string `json:"eventName" example:"marathon"`
 	Deagnosis []Deagnosis `json:"deagnosis"`

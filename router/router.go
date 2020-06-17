@@ -21,6 +21,9 @@ func InitRouter() {
     
     router.POST("/prove", api.PostUserProve)
     router.POST("/verify", api.PostVerify)
+    router.POST("/event", api.PostEvent)
+    router.GET("/event", api.GetEvent)
+    router.DELETE("/event", api.DelEvent)
 
     url := ginSwagger.URL("http://localhost:8080/swagger/doc.json") // The url pointing to API definition
 	router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler, url))
