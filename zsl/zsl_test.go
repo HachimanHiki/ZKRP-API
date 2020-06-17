@@ -4,7 +4,7 @@ import (
 	//"encoding/json"
 	"testing"
 
-	"github.com/zkrpApi/zsl/zkrp"
+	"github.com/HachimanHiki/zkrpApi/zkrp"
 )
 
 func BenchmarkCommitter_GO(b *testing.B) {

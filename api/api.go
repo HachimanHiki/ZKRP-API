@@ -7,8 +7,8 @@ import (
 	//"fmt"
 
 	//"github.com/zkrpApi/zsl/zkrp"
-	"github.com/zkrpApi/selftype"
-	"github.com/zkrpApi/zsl"
+	"github.com/HachimanHiki/zkrpApi/selftype"
+	"github.com/HachimanHiki/zkrpApi/zsl"
     "github.com/gin-gonic/gin"
 )
 

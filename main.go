@@ -1,9 +1,9 @@
 package main
 
 import (
-	"github.com/zkrpApi/router"
+	"github.com/HachimanHiki/zkrpApi/router"
 
-	_ "github.com/zkrpApi/docs"
+	_ "github.com/HachimanHiki/zkrpApi/docs"
 )
 
 // @title Swagger Example API
