@@ -207,7 +207,7 @@ var doc = `{
                         "schema": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/selftype.Deagnosis"
+                                "$ref": "#/definitions/selftype.DeagnosisDate"
                             }
                         }
                     },
@@ -219,7 +219,7 @@ var doc = `{
                         "schema": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/selftype.Procedure"
+                                "$ref": "#/definitions/selftype.ProcedureDate"
                             }
                         }
                     }
@@ -289,10 +289,29 @@ var doc = `{
             "type": "object",
             "properties": {
                 "deagnosisCode": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "J0190"
                 },
                 "duringTime": {
-                    "type": "string"
+                    "type": "integer",
+                    "example": 28
+                }
+            }
+        },
+        "selftype.DeagnosisDate": {
+            "type": "object",
+            "properties": {
+                "date": {
+                    "type": "string",
+                    "example": "20200505"
+                },
+                "deagnosisCode": {
+                    "type": "string",
+                    "example": "J0190"
+                },
+                "duringTime": {
+                    "type": "integer",
+                    "example": 28
                 }
             }
         },
@@ -306,7 +325,8 @@ var doc = `{
                     }
                 },
                 "eventName": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "marathon"
                 },
                 "procedure": {
                     "type": "array",
@@ -320,7 +340,8 @@ var doc = `{
             "type": "object",
             "properties": {
                 "name": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "marathon"
                 }
             }
         },
@@ -355,10 +376,29 @@ var doc = `{
             "type": "object",
             "properties": {
                 "duringTime": {
-                    "type": "string"
+                    "type": "integer",
+                    "example": 28
                 },
                 "procedureCode": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "3950"
+                }
+            }
+        },
+        "selftype.ProcedureDate": {
+            "type": "object",
+            "properties": {
+                "date": {
+                    "type": "string",
+                    "example": "20200505"
+                },
+                "duringTime": {
+                    "type": "integer",
+                    "example": 28
+                },
+                "procedureCode": {
+                    "type": "string",
+                    "example": "3950"
                 }
             }
         },
@@ -366,22 +406,27 @@ var doc = `{
             "type": "object",
             "properties": {
                 "code": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "J0390"
                 },
                 "commitment": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "0x1af2e641e834f6c503e0e6b9b593323342e7d45ad0aa299bc934110a4e13ae2f33c3a0fc695f397d51e8b4699b4d9f9397b3bc3e20fa42cb1a540ff8f19dc118"
                 },
                 "lowerbound": {
-                    "type": "integer"
+                    "type": "integer",
+                    "example": 20200503
                 },
                 "prove": {
                     "type": "string"
                 },
                 "type": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "Deagnosis"
                 },
                 "upperbound": {
-                    "type": "integer"
+                    "type": "integer",
+                    "example": 20200531
                 }
             }
         },

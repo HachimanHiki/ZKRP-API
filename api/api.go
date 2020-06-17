@@ -30,9 +30,9 @@ func NotFound(c *gin.Context) {
 // @Description Give a prove of ZKRP
 // @Accept  application/json
 // @Produce  application/json
-// @Param requestTime body string true "requestTime"
-// @Param deagnosis body []selftype.Deagnosis true "[]Deagnosis" 
-// @Param procedure body []selftype.Procedure true "[]Procedure" 
+// @Param requestTime body string true "requestTime" extensions(Henry)
+// @Param deagnosis body []selftype.DeagnosisDate true "[]Deagnosis" 
+// @Param procedure body []selftype.ProcedureDate true "[]Procedure" 
 // @Success 200 {object} selftype.ProvePackagesResponse
 // @Failure 400 {object} selftype.JSONResponse
 // @Router /prove [post]
@@ -50,7 +50,7 @@ func PostUserProve(c *gin.Context) {
 			t = t.AddDate(0, 0, -28)
 			lowerbound, _ := strconv.ParseInt(t.Format(layout), 10, 64) // 28 day before today
 
-			number, _ := strconv.ParseInt(deagnosis.DuringTime, 10, 64)
+			number, _ := strconv.ParseInt(deagnosis.Date, 10, 64)
 
 			commitmentPackage := zsl.Committer(int(number))
 
@@ -71,7 +71,7 @@ func PostUserProve(c *gin.Context) {
 			t = t.AddDate(0, 0, -28) 
 			lowerbound, _ := strconv.ParseInt(t.Format(layout), 10, 64) // 28 day before today
 
-			number, _ := strconv.ParseInt(procedure.DuringTime, 10, 64)
+			number, _ := strconv.ParseInt(procedure.Date, 10, 64)
 
 			commitmentPackage := zsl.Committer(int(number))
 

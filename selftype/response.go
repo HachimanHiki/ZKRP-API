@@ -7,7 +7,7 @@ type JSONResponse struct {
 
 type ProvePackagesResponse struct {
 	JSONResponse
-	ProvePackage []ProvePackage `json:"data "`
+	ProvePackage []ProvePackage `json:"data"`
 }
 
 type EventResponse struct {

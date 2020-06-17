@@ -2,9 +2,23 @@ definitions:
   selftype.Deagnosis:
     properties:
       deagnosisCode:
+        example: J0190
         type: string
       duringTime:
+        example: 28
+        type: integer
+    type: object
+  selftype.DeagnosisDate:
+    properties:
+      date:
+        example: "20200505"
         type: string
+      deagnosisCode:
+        example: J0190
+        type: string
+      duringTime:
+        example: 28
+        type: integer
     type: object
   selftype.Event:
     properties:
@@ -13,6 +27,7 @@ definitions:
           $ref: '#/definitions/selftype.Deagnosis'
         type: array
       eventName:
+        example: marathon
         type: string
       procedure:
         items:
@@ -22,6 +37,7 @@ definitions:
   selftype.EventName:
     properties:
       name:
+        example: marathon
         type: string
     type: object
   selftype.EventResponse:
@@ -45,23 +61,42 @@ definitions:
   selftype.Procedure:
     properties:
       duringTime:
-        type: string
+        example: 28
+        type: integer
       procedureCode:
+        example: "3950"
+        type: string
+    type: object
+  selftype.ProcedureDate:
+    properties:
+      date:
+        example: "20200505"
+        type: string
+      duringTime:
+        example: 28
+        type: integer
+      procedureCode:
+        example: "3950"
         type: string
     type: object
   selftype.ProvePackage:
     properties:
       code:
+        example: J0390
         type: string
       commitment:
+        example: 0x1af2e641e834f6c503e0e6b9b593323342e7d45ad0aa299bc934110a4e13ae2f33c3a0fc695f397d51e8b4699b4d9f9397b3bc3e20fa42cb1a540ff8f19dc118
         type: string
       lowerbound:
+        example: 20200503
         type: integer
       prove:
         type: string
       type:
+        example: Deagnosis
         type: string
       upperbound:
+        example: 20200531
         type: integer
     type: object
   selftype.ProvePackagesResponse:
@@ -202,7 +237,7 @@ paths:
         required: true
         schema:
           items:
-            $ref: '#/definitions/selftype.Deagnosis'
+            $ref: '#/definitions/selftype.DeagnosisDate'
           type: array
       - description: '[]Procedure'
         in: body
@@ -210,7 +245,7 @@ paths:
         required: true
         schema:
           items:
-            $ref: '#/definitions/selftype.Procedure'
+            $ref: '#/definitions/selftype.ProcedureDate'
           type: array
       produces:
       - application/json

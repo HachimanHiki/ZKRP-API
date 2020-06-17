@@ -1,28 +1,38 @@
 package selftype
 
 type Deagnosis struct {
-	DeagnosisCode string
-	DuringTime string
+	DeagnosisCode string `json:"deagnosisCode" example:"J0190"`
+	DuringTime int `json:"duringTime" example:"28"`
+}
+
+type DeagnosisDate struct {
+	Deagnosis
+	Date string `json:"date" example:"20200505"`
 }
 
 type Procedure struct {
-	ProcedureCode string
-	DuringTime string
+	ProcedureCode string `json:"procedureCode" example:"3950"`
+	DuringTime int `json:"duringTime" example:"28"`
+}
+
+type ProcedureDate struct {
+	Procedure
+	Date string `json:"date" example:"20200505"`
 }
 
 type ProveRequired struct {
-	RequestTime string `json:"requestTime"`
-	Deagnosis []Deagnosis `json:"deagnosis"`
-	Procedure []Procedure `json:"procedure"`
+	RequestTime string `json:"requestTime" example:"20200531"`
+	Deagnosis []DeagnosisDate `json:"deagnosisDate"`
+	Procedure []ProcedureDate `json:"procedureDate"`
 }
 
 type ProvePackage struct {
-	Type string `json:"type"`
-	Code string `json:"code"`
+	Type string `json:"type" example:"Deagnosis"`
+	Code string `json:"code" example:"J0390"`
 	Prove string `json:"prove"`
-	Lowerbound int64 `json:"lowerbound"`
-	Upperbound int64 `json:"upperbound"`
-	Commitment string `json:"commitment"`
+	Lowerbound int64 `json:"lowerbound" example:"20200503"`
+	Upperbound int64 `json:"upperbound" example:"20200531"`
+	Commitment string `json:"commitment" example:"0x1af2e641e834f6c503e0e6b9b593323342e7d45ad0aa299bc934110a4e13ae2f33c3a0fc695f397d51e8b4699b4d9f9397b3bc3e20fa42cb1a540ff8f19dc118"`
 }
 
 type Verify struct {
@@ -31,11 +41,11 @@ type Verify struct {
 
 
 type EventName struct {
-	Name string `json:"name"`
+	Name string `json:"name" example:"marathon"`
 }
 
 type Event struct {
-	EventName string `json:"eventName"`
+	EventName string `json:"eventName" example:"marathon"`
 	Deagnosis []Deagnosis `json:"deagnosis"`
 	Procedure []Procedure `json:"procedure"`
 }
