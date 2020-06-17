@@ -1,0 +1,445 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "This is a sample server celler server.",
+        "title": "Swagger Example API",
+        "termsOfService": "http://swagger.io/terms/",
+        "contact": {
+            "name": "API Support",
+            "url": "http://www.swagger.io/support",
+            "email": "support@swagger.io"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "version": "1.0"
+    },
+    "host": "localhost:8080",
+    "paths": {
+        "/event": {
+            "post": {
+                "description": "null",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Event"
+                ],
+                "summary": "Add/Update event",
+                "parameters": [
+                    {
+                        "description": "EventName",
+                        "name": "eventName",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/selftype.EventName"
+                        }
+                    },
+                    {
+                        "description": "[]Deagnosis",
+                        "name": "deagnosis",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/selftype.Deagnosis"
+                            }
+                        }
+                    },
+                    {
+                        "description": "[]Procedure",
+                        "name": "procedure",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/selftype.Procedure"
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/selftype.EventResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/selftype.JSONResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/event/{eventName}": {
+            "get": {
+                "description": "Get an event from string",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Event"
+                ],
+                "summary": "Get an event",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "event search by eventName",
+                        "name": "eventName",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/selftype.EventResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/selftype.JSONResponse"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Event"
+                ],
+                "summary": "Delete an event",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "event delete by eventName",
+                        "name": "eventName",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/selftype.JSONResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/selftype.JSONResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/selftype.JSONResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/prove": {
+            "post": {
+                "description": "Give a prove of ZKRP",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "ZKRP"
+                ],
+                "summary": "Prove ZKRP",
+                "parameters": [
+                    {
+                        "description": "UserInfo",
+                        "name": "\\u500b\\u4eba\\u8cc7\\u8a0a",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/selftype.UserInfo"
+                        }
+                    },
+                    {
+                        "description": "[]Outpatient",
+                        "name": "\\u897f\\u91ab\\u8cc7\\u8a0a",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/selftype.Outpatient"
+                            }
+                        }
+                    },
+                    {
+                        "description": "[]Hospitalization",
+                        "name": "\\u4f4f\\u9662\\u8cc7\\u8a0a",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/selftype.Hospitalization"
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/selftype.ProvePackagesResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/selftype.JSONResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/verify": {
+            "post": {
+                "description": "Verify a prove of ZKRP",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "ZKRP"
+                ],
+                "summary": "Verify ZKRP",
+                "parameters": [
+                    {
+                        "description": "[]ProvePackage",
+                        "name": "provePackages",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/selftype.ProvePackage"
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/selftype.JSONResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/selftype.JSONResponse"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "selftype.Deagnosis": {
+            "type": "object",
+            "properties": {
+                "deagnosisCode": {
+                    "type": "string"
+                },
+                "duringTime": {
+                    "type": "string"
+                }
+            }
+        },
+        "selftype.Event": {
+            "type": "object",
+            "properties": {
+                "deagnosis": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/selftype.Deagnosis"
+                    }
+                },
+                "eventName": {
+                    "type": "string"
+                },
+                "procedure": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/selftype.Procedure"
+                    }
+                }
+            }
+        },
+        "selftype.EventName": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                }
+            }
+        },
+        "selftype.EventResponse": {
+            "type": "object",
+            "properties": {
+                "data": {
+                    "$ref": "#/definitions/selftype.Event"
+                },
+                "message": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "string",
+                    "example": "success"
+                }
+            }
+        },
+        "selftype.Hospitalization": {
+            "type": "object",
+            "properties": {
+                "入院日期": {
+                    "type": "string"
+                },
+                "出院日期": {
+                    "type": "string"
+                },
+                "疾病分類名稱": {
+                    "type": "string"
+                },
+                "疾病分類碼": {
+                    "type": "string"
+                },
+                "處置名稱": {
+                    "type": "string"
+                },
+                "處置碼": {
+                    "type": "string"
+                }
+            }
+        },
+        "selftype.JSONResponse": {
+            "type": "object",
+            "properties": {
+                "message": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "string",
+                    "example": "success"
+                }
+            }
+        },
+        "selftype.Outpatient": {
+            "type": "object",
+            "properties": {
+                "就醫日期": {
+                    "type": "string"
+                },
+                "疾病分類名稱": {
+                    "type": "string"
+                },
+                "疾病分類碼": {
+                    "type": "string"
+                },
+                "處置名稱": {
+                    "type": "string"
+                },
+                "處置碼": {
+                    "type": "string"
+                }
+            }
+        },
+        "selftype.Procedure": {
+            "type": "object",
+            "properties": {
+                "duringTime": {
+                    "type": "string"
+                },
+                "procedureCode": {
+                    "type": "string"
+                }
+            }
+        },
+        "selftype.ProvePackage": {
+            "type": "object",
+            "properties": {
+                "commitment": {
+                    "type": "string"
+                },
+                "lowerbound": {
+                    "type": "integer"
+                },
+                "prove": {
+                    "type": "string"
+                },
+                "upperbound": {
+                    "type": "integer"
+                }
+            }
+        },
+        "selftype.ProvePackagesResponse": {
+            "type": "object",
+            "properties": {
+                "data": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/selftype.ProvePackage"
+                    }
+                },
+                "message": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "string",
+                    "example": "success"
+                }
+            }
+        },
+        "selftype.UserInfo": {
+            "type": "object",
+            "properties": {
+                "姓名": {
+                    "type": "string"
+                },
+                "申請日期": {
+                    "type": "string"
+                },
+                "身分證號": {
+                    "type": "string"
+                }
+            }
+        }
+    },
+    "x-extension-openapi": {
+        "example": "value on a json format"
+    }
+}

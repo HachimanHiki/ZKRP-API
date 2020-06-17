@@ -1,0 +1,292 @@
+definitions:
+  selftype.Deagnosis:
+    properties:
+      deagnosisCode:
+        type: string
+      duringTime:
+        type: string
+    type: object
+  selftype.Event:
+    properties:
+      deagnosis:
+        items:
+          $ref: '#/definitions/selftype.Deagnosis'
+        type: array
+      eventName:
+        type: string
+      procedure:
+        items:
+          $ref: '#/definitions/selftype.Procedure'
+        type: array
+    type: object
+  selftype.EventName:
+    properties:
+      name:
+        type: string
+    type: object
+  selftype.EventResponse:
+    properties:
+      data:
+        $ref: '#/definitions/selftype.Event'
+      message:
+        type: string
+      status:
+        example: success
+        type: string
+    type: object
+  selftype.Hospitalization:
+    properties:
+      入院日期:
+        type: string
+      出院日期:
+        type: string
+      疾病分類名稱:
+        type: string
+      疾病分類碼:
+        type: string
+      處置名稱:
+        type: string
+      處置碼:
+        type: string
+    type: object
+  selftype.JSONResponse:
+    properties:
+      message:
+        type: string
+      status:
+        example: success
+        type: string
+    type: object
+  selftype.Outpatient:
+    properties:
+      就醫日期:
+        type: string
+      疾病分類名稱:
+        type: string
+      疾病分類碼:
+        type: string
+      處置名稱:
+        type: string
+      處置碼:
+        type: string
+    type: object
+  selftype.Procedure:
+    properties:
+      duringTime:
+        type: string
+      procedureCode:
+        type: string
+    type: object
+  selftype.ProvePackage:
+    properties:
+      commitment:
+        type: string
+      lowerbound:
+        type: integer
+      prove:
+        type: string
+      upperbound:
+        type: integer
+    type: object
+  selftype.ProvePackagesResponse:
+    properties:
+      data:
+        items:
+          $ref: '#/definitions/selftype.ProvePackage'
+        type: array
+      message:
+        type: string
+      status:
+        example: success
+        type: string
+    type: object
+  selftype.UserInfo:
+    properties:
+      姓名:
+        type: string
+      申請日期:
+        type: string
+      身分證號:
+        type: string
+    type: object
+host: localhost:8080
+info:
+  contact:
+    email: support@swagger.io
+    name: API Support
+    url: http://www.swagger.io/support
+  description: This is a sample server celler server.
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: http://swagger.io/terms/
+  title: Swagger Example API
+  version: "1.0"
+paths:
+  /event:
+    post:
+      consumes:
+      - application/json
+      description: "null"
+      parameters:
+      - description: EventName
+        in: body
+        name: eventName
+        required: true
+        schema:
+          $ref: '#/definitions/selftype.EventName'
+      - description: '[]Deagnosis'
+        in: body
+        name: deagnosis
+        required: true
+        schema:
+          items:
+            $ref: '#/definitions/selftype.Deagnosis'
+          type: array
+      - description: '[]Procedure'
+        in: body
+        name: procedure
+        required: true
+        schema:
+          items:
+            $ref: '#/definitions/selftype.Procedure'
+          type: array
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/selftype.EventResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/selftype.JSONResponse'
+      summary: Add/Update event
+      tags:
+      - Event
+  /event/{eventName}:
+    delete:
+      consumes:
+      - application/json
+      parameters:
+      - description: event delete by eventName
+        in: query
+        name: eventName
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/selftype.JSONResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/selftype.JSONResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/selftype.JSONResponse'
+      summary: Delete an event
+      tags:
+      - Event
+    get:
+      consumes:
+      - application/json
+      description: Get an event from string
+      parameters:
+      - description: event search by eventName
+        in: query
+        name: eventName
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/selftype.EventResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/selftype.JSONResponse'
+      summary: Get an event
+      tags:
+      - Event
+  /prove:
+    post:
+      consumes:
+      - application/json
+      description: Give a prove of ZKRP
+      parameters:
+      - description: UserInfo
+        in: body
+        name: \u500b\u4eba\u8cc7\u8a0a
+        required: true
+        schema:
+          $ref: '#/definitions/selftype.UserInfo'
+      - description: '[]Outpatient'
+        in: body
+        name: \u897f\u91ab\u8cc7\u8a0a
+        required: true
+        schema:
+          items:
+            $ref: '#/definitions/selftype.Outpatient'
+          type: array
+      - description: '[]Hospitalization'
+        in: body
+        name: \u4f4f\u9662\u8cc7\u8a0a
+        required: true
+        schema:
+          items:
+            $ref: '#/definitions/selftype.Hospitalization'
+          type: array
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/selftype.ProvePackagesResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/selftype.JSONResponse'
+      summary: Prove ZKRP
+      tags:
+      - ZKRP
+  /verify:
+    post:
+      consumes:
+      - application/json
+      description: Verify a prove of ZKRP
+      parameters:
+      - description: '[]ProvePackage'
+        in: body
+        name: provePackages
+        required: true
+        schema:
+          items:
+            $ref: '#/definitions/selftype.ProvePackage'
+          type: array
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/selftype.JSONResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/selftype.JSONResponse'
+      summary: Verify ZKRP
+      tags:
+      - ZKRP
+swagger: "2.0"
+x-extension-openapi:
+  example: value on a json format
