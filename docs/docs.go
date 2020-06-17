@@ -191,35 +191,35 @@ var doc = `{
                 "summary": "Prove ZKRP",
                 "parameters": [
                     {
-                        "description": "UserInfo",
-                        "name": "\\u500b\\u4eba\\u8cc7\\u8a0a",
+                        "description": "requestTime",
+                        "name": "requestTime",
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/selftype.UserInfo"
+                            "type": "string"
                         }
                     },
                     {
-                        "description": "[]Outpatient",
-                        "name": "\\u897f\\u91ab\\u8cc7\\u8a0a",
+                        "description": "[]Deagnosis",
+                        "name": "deagnosis",
                         "in": "body",
                         "required": true,
                         "schema": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/selftype.Outpatient"
+                                "$ref": "#/definitions/selftype.Deagnosis"
                             }
                         }
                     },
                     {
-                        "description": "[]Hospitalization",
-                        "name": "\\u4f4f\\u9662\\u8cc7\\u8a0a",
+                        "description": "[]Procedure",
+                        "name": "procedure",
                         "in": "body",
                         "required": true,
                         "schema": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/selftype.Hospitalization"
+                                "$ref": "#/definitions/selftype.Procedure"
                             }
                         }
                     }
@@ -339,29 +339,6 @@ var doc = `{
                 }
             }
         },
-        "selftype.Hospitalization": {
-            "type": "object",
-            "properties": {
-                "入院日期": {
-                    "type": "string"
-                },
-                "出院日期": {
-                    "type": "string"
-                },
-                "疾病分類名稱": {
-                    "type": "string"
-                },
-                "疾病分類碼": {
-                    "type": "string"
-                },
-                "處置名稱": {
-                    "type": "string"
-                },
-                "處置碼": {
-                    "type": "string"
-                }
-            }
-        },
         "selftype.JSONResponse": {
             "type": "object",
             "properties": {
@@ -371,26 +348,6 @@ var doc = `{
                 "status": {
                     "type": "string",
                     "example": "success"
-                }
-            }
-        },
-        "selftype.Outpatient": {
-            "type": "object",
-            "properties": {
-                "就醫日期": {
-                    "type": "string"
-                },
-                "疾病分類名稱": {
-                    "type": "string"
-                },
-                "疾病分類碼": {
-                    "type": "string"
-                },
-                "處置名稱": {
-                    "type": "string"
-                },
-                "處置碼": {
-                    "type": "string"
                 }
             }
         },
@@ -408,6 +365,9 @@ var doc = `{
         "selftype.ProvePackage": {
             "type": "object",
             "properties": {
+                "code": {
+                    "type": "string"
+                },
                 "commitment": {
                     "type": "string"
                 },
@@ -415,6 +375,9 @@ var doc = `{
                     "type": "integer"
                 },
                 "prove": {
+                    "type": "string"
+                },
+                "type": {
                     "type": "string"
                 },
                 "upperbound": {
@@ -437,20 +400,6 @@ var doc = `{
                 "status": {
                     "type": "string",
                     "example": "success"
-                }
-            }
-        },
-        "selftype.UserInfo": {
-            "type": "object",
-            "properties": {
-                "姓名": {
-                    "type": "string"
-                },
-                "申請日期": {
-                    "type": "string"
-                },
-                "身分證號": {
-                    "type": "string"
                 }
             }
         }

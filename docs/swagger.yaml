@@ -34,40 +34,12 @@ definitions:
         example: success
         type: string
     type: object
-  selftype.Hospitalization:
-    properties:
-      入院日期:
-        type: string
-      出院日期:
-        type: string
-      疾病分類名稱:
-        type: string
-      疾病分類碼:
-        type: string
-      處置名稱:
-        type: string
-      處置碼:
-        type: string
-    type: object
   selftype.JSONResponse:
     properties:
       message:
         type: string
       status:
         example: success
-        type: string
-    type: object
-  selftype.Outpatient:
-    properties:
-      就醫日期:
-        type: string
-      疾病分類名稱:
-        type: string
-      疾病分類碼:
-        type: string
-      處置名稱:
-        type: string
-      處置碼:
         type: string
     type: object
   selftype.Procedure:
@@ -79,11 +51,15 @@ definitions:
     type: object
   selftype.ProvePackage:
     properties:
+      code:
+        type: string
       commitment:
         type: string
       lowerbound:
         type: integer
       prove:
+        type: string
+      type:
         type: string
       upperbound:
         type: integer
@@ -98,15 +74,6 @@ definitions:
         type: string
       status:
         example: success
-        type: string
-    type: object
-  selftype.UserInfo:
-    properties:
-      姓名:
-        type: string
-      申請日期:
-        type: string
-      身分證號:
         type: string
     type: object
 host: localhost:8080
@@ -223,27 +190,27 @@ paths:
       - application/json
       description: Give a prove of ZKRP
       parameters:
-      - description: UserInfo
+      - description: requestTime
         in: body
-        name: \u500b\u4eba\u8cc7\u8a0a
+        name: requestTime
         required: true
         schema:
-          $ref: '#/definitions/selftype.UserInfo'
-      - description: '[]Outpatient'
+          type: string
+      - description: '[]Deagnosis'
         in: body
-        name: \u897f\u91ab\u8cc7\u8a0a
+        name: deagnosis
         required: true
         schema:
           items:
-            $ref: '#/definitions/selftype.Outpatient'
+            $ref: '#/definitions/selftype.Deagnosis'
           type: array
-      - description: '[]Hospitalization'
+      - description: '[]Procedure'
         in: body
-        name: \u4f4f\u9662\u8cc7\u8a0a
+        name: procedure
         required: true
         schema:
           items:
-            $ref: '#/definitions/selftype.Hospitalization'
+            $ref: '#/definitions/selftype.Procedure'
           type: array
       produces:
       - application/json
