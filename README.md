@@ -1,9 +1,15 @@
 ## ZkrpApi
 
-### 啟動
+### Install required module & compile
 
 ```
-$ go run main.go
+$ go build .
+```
+
+### Start
+
+```
+$ ./zkrpApi
 ```
 
 ### API Docs
