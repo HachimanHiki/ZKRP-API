@@ -265,6 +265,15 @@ var doc = `{
                                 "$ref": "#/definitions/selftype.ProvePackage"
                             }
                         }
+                    },
+                    {
+                        "description": "userName",
+                        "name": "userName",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
                     }
                 ],
                 "responses": {
@@ -335,7 +344,8 @@ var doc = `{
                     }
                 },
                 "varifyURL": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "http://localhost:8080/verify"
                 }
             }
         },

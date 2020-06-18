@@ -68,7 +68,7 @@ func PostProve(c *gin.Context) {
 
 		for _, procedure := range proveRequired.Procedure {
 			t, _ := time.Parse(layout, proveRequired.RequestTime)
-			t = t.AddDate(0, 0, procedure.DuringTime) 
+			t = t.AddDate(0, 0, -procedure.DuringTime) 
 			lowerbound, _ := strconv.ParseInt(t.Format(layout), 10, 64) // "procedure.DuringTime" day before today
 
 			number, _ := strconv.ParseInt(procedure.Date, 10, 64)
@@ -106,7 +106,8 @@ func PostProve(c *gin.Context) {
 // @Description Verify a prove of ZKRP
 // @Accept  application/json
 // @Produce  application/json
-// @Param provePackages body []selftype.ProvePackage true "[]ProvePackage" 
+// @Param provePackages body []selftype.ProvePackage true "[]ProvePackage"
+// @Param userName body string true "userName"
 // @Success 200 {object} selftype.JSONResponse
 // @Failure 400 {object} selftype.JSONResponse
 // @Router /verify [post]
@@ -128,7 +129,7 @@ func PostVerify(c *gin.Context) {
 			if ! <-result {
 				c.JSON(http.StatusOK, gin.H{
 					"status": "success",
-					"message": "Verify fail",
+					"message": "Verify fail with user name: " + verify.UserName,
 				})
 				return
 			}
@@ -136,7 +137,7 @@ func PostVerify(c *gin.Context) {
 
 		c.JSON(http.StatusOK, gin.H{
 			"status": "success",
-			"message": "Verify success",
+			"message": "Verify success with user name: " + verify.UserName,
 		})
 
 	} else {

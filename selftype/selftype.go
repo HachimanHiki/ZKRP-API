@@ -37,11 +37,12 @@ type ProvePackage struct {
 
 type Verify struct {
 	ProvePackages []ProvePackage `json:"provePackages"`
+	UserName string `json:"userName" example:"\u738b\u6625\u5b0c"`
 }
 
 type Event struct {
 	EventName string `json:"eventName" example:"marathon"`
 	Deagnosis []Deagnosis `json:"deagnosis"`
 	Procedure []Procedure `json:"procedure"`
-	VarifyURL string `json:"varifyURL"`
+	VarifyURL string `json:"varifyURL" example:"http://localhost:8080/verify"`
 }
