@@ -34,12 +34,6 @@ definitions:
           $ref: '#/definitions/selftype.Procedure'
         type: array
     type: object
-  selftype.EventName:
-    properties:
-      name:
-        example: marathon
-        type: string
-    type: object
   selftype.EventResponse:
     properties:
       data:
@@ -136,7 +130,7 @@ paths:
         name: eventName
         required: true
         schema:
-          $ref: '#/definitions/selftype.EventName'
+          type: string
       - description: '[]Deagnosis'
         in: body
         name: deagnosis

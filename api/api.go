@@ -197,10 +197,19 @@ func GetEvent (c *gin.Context) {
 	eventName := c.Query("eventName")
 	
 	if len(eventName) > 0 {
-		c.JSON(http.StatusOK, gin.H{
-			"status": "success",
-			"data": allEvent[eventName],
-		})
+		if _, ok := allEvent[eventName]; ok {
+			c.JSON(http.StatusOK, gin.H{
+				"status": "success",
+				"message": "null",
+				"data": allEvent[eventName],
+			})
+
+		} else {
+			c.JSON(http.StatusNotFound, gin.H{
+				"status": "fail",
+				"message": "Cannot find this event",
+			})
+		}
 
 	} else {
 		c.JSON(http.StatusBadRequest, gin.H{
@@ -234,7 +243,7 @@ func DelEvent (c *gin.Context) {
 		} else {
 			c.JSON(http.StatusNotFound, gin.H{
 				"status": "fail",
-				"message": "Cannot find eventName",
+				"message": "Cannot find this event",
 			})
 		}
 

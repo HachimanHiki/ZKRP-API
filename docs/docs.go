@@ -53,7 +53,7 @@ var doc = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/selftype.EventName"
+                            "type": "string"
                         }
                     },
                     {
@@ -333,15 +333,6 @@ var doc = `{
                     "items": {
                         "$ref": "#/definitions/selftype.Procedure"
                     }
-                }
-            }
-        },
-        "selftype.EventName": {
-            "type": "object",
-            "properties": {
-                "name": {
-                    "type": "string",
-                    "example": "marathon"
                 }
             }
         },
