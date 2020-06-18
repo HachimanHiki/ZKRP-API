@@ -333,6 +333,9 @@ var doc = `{
                     "items": {
                         "$ref": "#/definitions/selftype.Procedure"
                     }
+                },
+                "varifyURL": {
+                    "type": "string"
                 }
             }
         },

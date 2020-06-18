@@ -43,4 +43,5 @@ type Event struct {
 	EventName string `json:"eventName" example:"marathon"`
 	Deagnosis []Deagnosis `json:"deagnosis"`
 	Procedure []Procedure `json:"procedure"`
+	VarifyURL string `json:"varifyURL"`
 }

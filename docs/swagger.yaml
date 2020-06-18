@@ -33,6 +33,8 @@ definitions:
         items:
           $ref: '#/definitions/selftype.Procedure'
         type: array
+      varifyURL:
+        type: string
     type: object
   selftype.EventResponse:
     properties:

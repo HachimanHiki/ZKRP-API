@@ -24,7 +24,7 @@ func NotFound(c *gin.Context) {
     })
 }
 
-// PostUserProve godoc
+// PostProve godoc
 // @Tags ZKRP 
 // @Summary Prove ZKRP
 // @Description Give a prove of ZKRP
@@ -161,6 +161,8 @@ func PostVerify(c *gin.Context) {
 // @Router /event [post]
 func PostEvent (c *gin.Context) {
 	event := selftype.Event{}
+	const verifyURLPrefix = "http://localhost:8080/verify"
+	event.VarifyURL = verifyURLPrefix
 
 	if c.BindJSON(&event) == nil {
 		if allEvent == nil {
@@ -193,7 +195,6 @@ func PostEvent (c *gin.Context) {
 // @Failure 400 {object} selftype.JSONResponse
 // @Router /event/{eventName} [get]
 func GetEvent (c *gin.Context) {
-	//eventName := selftype.EventName{}
 	eventName := c.Query("eventName")
 	
 	if len(eventName) > 0 {
