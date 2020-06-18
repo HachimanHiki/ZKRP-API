@@ -36,7 +36,7 @@ func NotFound(c *gin.Context) {
 // @Success 200 {object} selftype.ProvePackagesResponse
 // @Failure 400 {object} selftype.JSONResponse
 // @Router /prove [post]
-func PostUserProve(c *gin.Context) {
+func PostProve(c *gin.Context) {
 	proveRequired := selftype.ProveRequired{}
 
 	if c.BindJSON(&proveRequired) == nil {
@@ -47,8 +47,8 @@ func PostUserProve(c *gin.Context) {
 
 		for _, deagnosis := range proveRequired.Deagnosis {
 			t, _ := time.Parse(layout, proveRequired.RequestTime)
-			t = t.AddDate(0, 0, -28)
-			lowerbound, _ := strconv.ParseInt(t.Format(layout), 10, 64) // 28 day before today
+			t = t.AddDate(0, 0, -deagnosis.DuringTime)
+			lowerbound, _ := strconv.ParseInt(t.Format(layout), 10, 64) // "deagnosis.DuringTime" day before today
 
 			number, _ := strconv.ParseInt(deagnosis.Date, 10, 64)
 
@@ -68,8 +68,8 @@ func PostUserProve(c *gin.Context) {
 
 		for _, procedure := range proveRequired.Procedure {
 			t, _ := time.Parse(layout, proveRequired.RequestTime)
-			t = t.AddDate(0, 0, -28) 
-			lowerbound, _ := strconv.ParseInt(t.Format(layout), 10, 64) // 28 day before today
+			t = t.AddDate(0, 0, procedure.DuringTime) 
+			lowerbound, _ := strconv.ParseInt(t.Format(layout), 10, 64) // "procedure.DuringTime" day before today
 
 			number, _ := strconv.ParseInt(procedure.Date, 10, 64)
 
