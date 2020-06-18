@@ -128,7 +128,7 @@ func PostVerify(c *gin.Context) {
 			if ! <-result {
 				c.JSON(http.StatusOK, gin.H{
 					"status": "success",
-					"message": "verify fail",
+					"message": "Verify fail",
 				})
 				return
 			}
@@ -136,7 +136,7 @@ func PostVerify(c *gin.Context) {
 
 		c.JSON(http.StatusOK, gin.H{
 			"status": "success",
-			"message": "verify success",
+			"message": "Verify success",
 		})
 
 	} else {
@@ -200,7 +200,6 @@ func GetEvent (c *gin.Context) {
 		if _, ok := allEvent[eventName]; ok {
 			c.JSON(http.StatusOK, gin.H{
 				"status": "success",
-				"message": "null",
 				"data": allEvent[eventName],
 			})
 
@@ -238,7 +237,6 @@ func DelEvent (c *gin.Context) {
 
 			c.JSON(http.StatusOK, gin.H{
 				"status": "success",
-				"message": "null",
 			})
 		} else {
 			c.JSON(http.StatusNotFound, gin.H{
