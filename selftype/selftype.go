@@ -19,13 +19,13 @@ type ProcedureDate struct {
 	Procedure
 	Date string `json:"date" example:"20200505"`
 }
-
+/*
 type ProveRequired struct {
 	RequestTime string `json:"requestTime" example:"20200531"`
 	Deagnosis []DeagnosisDate `json:"deagnosisDate"`
 	Procedure []ProcedureDate `json:"procedureDate"`
 }
-
+*/
 type ProvePackage struct {
 	Type string `json:"type" example:"Deagnosis"`
 	Code string `json:"code" example:"J0390"`
@@ -37,7 +37,7 @@ type ProvePackage struct {
 
 type Verify struct {
 	ProvePackages []ProvePackage `json:"provePackages"`
-	UserName string `json:"userName" example:"\u738b\u6625\u5b0c"`
+	//UserName string `json:"userName" example:"\u738b\u6625\u5b0c"`
 }
 
 type Event struct {

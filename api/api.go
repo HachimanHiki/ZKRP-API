@@ -1,15 +1,17 @@
 package api
 
 import (
+	//"bytes"
+	//"encoding/json"
+	"fmt"
 	"net/http"
 	"strconv"
 	"time"
-	//"fmt"
 
 	//"github.com/zkrpApi/zsl/zkrp"
 	"github.com/HachimanHiki/zkrpApi/selftype"
 	"github.com/HachimanHiki/zkrpApi/zsl"
-    "github.com/gin-gonic/gin"
+	"github.com/gin-gonic/gin"
 )
 
 var (
@@ -24,6 +26,99 @@ func NotFound(c *gin.Context) {
     })
 }
 
+func NewProve (c *gin.Context) {
+	proveRequired := selftype.ProveRequired{}
+
+	if c.BindJSON(&proveRequired) == nil {
+		const layout = "20060102" // time format
+		var ProvePackages []selftype.ProvePackage
+
+		upperbound, _ := strconv.ParseInt(time.Now().Format(layout), 10, 64) // today
+
+		for _, hospitalInfo := range proveRequired.HospitalInfo {
+			t, _ := time.Parse(layout, time.Now().Format(layout))
+			t = t.AddDate(0, 0, -28)
+			lowerbound, _ := strconv.ParseInt(t.Format(layout), 10, 64) // "hospitalInfo.DuringTime" day before today
+
+			number, _ := strconv.ParseInt(hospitalInfo.OutHospitalDate, 10, 64)
+
+			commitmentPackage := zsl.Committer(int(number))
+
+			ProvePackage := selftype.ProvePackage {
+				Type: "DiseaseID",
+				Code: hospitalInfo.DiseaseID,
+				Prove: zsl.Prover(number, lowerbound, upperbound, commitmentPackage.Confounding),
+				Lowerbound: lowerbound,
+				Upperbound: upperbound,
+				Commitment: commitmentPackage.Commitment,
+			}
+			
+			ProvePackages = append(ProvePackages, ProvePackage)
+		}
+
+		for _, hospitalInfo := range proveRequired.HospitalInfo {
+			t, _ := time.Parse(layout, time.Now().Format(layout))
+			t = t.AddDate(0, 0, -28)
+			lowerbound, _ := strconv.ParseInt(t.Format(layout), 10, 64) // "hospitalInfo.DuringTime" day before today
+
+			number, _ := strconv.ParseInt(hospitalInfo.OutHospitalDate, 10, 64)
+
+			commitmentPackage := zsl.Committer(int(number))
+
+			ProvePackage := selftype.ProvePackage {
+				Type: "OperationID",
+				Code: hospitalInfo.OperationID,
+				Prove: zsl.Prover(number, lowerbound, upperbound, commitmentPackage.Confounding),
+				Lowerbound: lowerbound,
+				Upperbound: upperbound,
+				Commitment: commitmentPackage.Commitment,
+			}
+			
+			ProvePackages = append(ProvePackages, ProvePackage)
+		}
+
+		for _, westernMedicine := range proveRequired.WesternMedicine {
+			t, _ := time.Parse(layout, time.Now().Format(layout))
+			t = t.AddDate(0, 0, -28)
+			lowerbound, _ := strconv.ParseInt(t.Format(layout), 10, 64) // "procedure.DuringTime" day before today
+
+			number, _ := strconv.ParseInt(westernMedicine.MedicalDate, 10, 64)
+
+			commitmentPackage := zsl.Committer(int(number))
+
+			ProvePackage := selftype.ProvePackage {
+				Type: "DiseaseID",
+				Code: westernMedicine.DiseaseID,
+				Prove: zsl.Prover(number, lowerbound, upperbound, commitmentPackage.Confounding),
+				Lowerbound: lowerbound,
+				Upperbound: upperbound,
+				Commitment: commitmentPackage.Commitment,
+			}
+
+			ProvePackages = append(ProvePackages, ProvePackage) 
+		}
+/*
+		jsonValue, _ := json.Marshal(ProvePackages)
+		jsonString := "{provePackages:" + string(jsonValue) + "}"
+
+		fmt.Println(jsonString)
+		res, _ := http.Post("http://localhost:8080/verify", "application/json", bytes.NewBuffer(jsonValue))
+		fmt.Println(res)
+*/
+		c.JSON(http.StatusOK, gin.H{
+			"status": "success",
+			//"data": ProvePackages,
+		})
+
+	} else {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"status": "fail",
+			"message": "Bad request!",
+		})
+	}
+}
+
+/*
 // PostProve godoc
 // @Tags ZKRP 
 // @Summary Prove ZKRP
@@ -98,7 +193,7 @@ func PostProve(c *gin.Context) {
 			"message": "Bad request!",
 		})
 	}
-}
+}*/
 
 // PostVerify godoc
 // @Tags ZKRP 
@@ -129,7 +224,8 @@ func PostVerify(c *gin.Context) {
 			if ! <-result {
 				c.JSON(http.StatusOK, gin.H{
 					"status": "success",
-					"message": "Verify fail with user name: " + verify.UserName,
+					//"message": "Verify fail with user name: " + verify.UserName,
+					"message": "false",
 				})
 				return
 			}
@@ -137,10 +233,12 @@ func PostVerify(c *gin.Context) {
 
 		c.JSON(http.StatusOK, gin.H{
 			"status": "success",
-			"message": "Verify success with user name: " + verify.UserName,
+			//"message": "Verify success with user name: " + verify.UserName,
+			"message": "true",
 		})
 
 	} else {
+		fmt.Println(verify)
 		c.JSON(http.StatusBadRequest, gin.H{
 			"status": "fail",
 			"message": "Bad request!",
