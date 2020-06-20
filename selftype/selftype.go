@@ -1,31 +1,43 @@
 package selftype
 
-type Deagnosis struct {
-	DeagnosisCode string `json:"deagnosisCode" example:"J0190"`
-	DuringTime int `json:"duringTime" example:"28"`
+type DiseaseInfo struct {
+	DiseaseID string `json:"diseaseId" example:"R093"`
+	DiseaseName string `json:"diseaseName" example:"\u75f0\u7570\u5e38"`
+	RequireDays int `json:"requireDays" example:"28"`
 }
 
-type DeagnosisDate struct {
-	Deagnosis
-	Date string `json:"date" example:"20200505"`
+type OperationInfo struct {
+	OperationID	string `json:"operationId" example:"8155"`
+	OperationName string `json:"operationName" example:"\u819d\u95dc\u7bc0\u518d\u7f6e\u63db\u8853"`
+	RequireDays int `json:"requireDays" example:"28"`
 }
 
-type Procedure struct {
-	ProcedureCode string `json:"procedureCode" example:"3950"`
-	DuringTime int `json:"duringTime" example:"28"`
+type WesternMedicine struct {
+	ID int	`json:"id"`
+	DiseaseID string `json:"diseaseId"`
+	DiseaseName string `json:"diseaseName"`
+	MedicalDate	string `json:"medicalDate"`
+	HospitalID int `json:"hospitalId"`
+	HospitalName string `json:"hospitalName"`
 }
 
-type ProcedureDate struct {
-	Procedure
-	Date string `json:"date" example:"20200505"`
+type HospitalInfo struct {
+	ID int	`json:"id"`
+	DiseaseID string `json:"diseaseId"`
+	DiseaseName string `json:"diseaseName"`
+	OperationID	string `json:"operationId"`
+	OperationName string `json:"operationName"`
+	InHospitalDate string `json:"inHospitalDate"`
+	OutHospitalDate string `json:"outHospitalDate"`
+	HospitalID int `json:"hospitalId"`
+	HospitalName string `json:"hospitalName"`
 }
-/*
+
 type ProveRequired struct {
-	RequestTime string `json:"requestTime" example:"20200531"`
-	Deagnosis []DeagnosisDate `json:"deagnosisDate"`
-	Procedure []ProcedureDate `json:"procedureDate"`
+	WesternMedicine []WesternMedicine `json:"westernMedicine"`
+	HospitalInfo []HospitalInfo `json:"hospitalInfo"`
 }
-*/
+
 type ProvePackage struct {
 	Type string `json:"type" example:"Deagnosis"`
 	Code string `json:"code" example:"J0390"`
@@ -42,7 +54,7 @@ type Verify struct {
 
 type Event struct {
 	EventName string `json:"eventName" example:"marathon"`
-	Deagnosis []Deagnosis `json:"deagnosis"`
-	Procedure []Procedure `json:"procedure"`
+	DiseaseInfo []DiseaseInfo `json:"diseaseInfo"`
+	OperationInfo []OperationInfo `json:"operationInfo"`
 	VarifyURL string `json:"varifyURL" example:"http://localhost:8080/verify"`
 }

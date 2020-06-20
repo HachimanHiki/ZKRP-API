@@ -3,3 +3,6 @@ zkrpApi
 
 # VS code
 .vscode
+
+# test json
+*.json

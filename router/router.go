@@ -20,7 +20,6 @@ func InitRouter() {
     router.NoRoute(api.NotFound)
     
     router.POST("/prove", api.NewProve)
-    //router.POST("/prove", api.PostProve)
     router.POST("/verify", api.PostVerify)
     router.POST("/event", api.PostEvent)
     router.GET("/event", api.GetEvent)
