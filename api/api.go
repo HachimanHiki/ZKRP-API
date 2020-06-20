@@ -1,12 +1,13 @@
 package api
 
 import (
-	//"bytes"
-	//"encoding/json"
+	"bytes"
+	"encoding/json"
 	"fmt"
 	"net/http"
 	"strconv"
 	"time"
+	"io/ioutil"
 
 	//"github.com/zkrpApi/zsl/zkrp"
 	"github.com/HachimanHiki/zkrpApi/selftype"
@@ -97,17 +98,19 @@ func NewProve (c *gin.Context) {
 
 			ProvePackages = append(ProvePackages, ProvePackage) 
 		}
-/*
-		jsonValue, _ := json.Marshal(ProvePackages)
-		jsonString := "{provePackages:" + string(jsonValue) + "}"
 
-		fmt.Println(jsonString)
+		jsonValue, _ := json.Marshal(ProvePackages)
+		jsonString := `{"provePackages":` + string(jsonValue) + "}"
+		jsonValue = []byte(jsonString)
+
 		res, _ := http.Post("http://localhost:8080/verify", "application/json", bytes.NewBuffer(jsonValue))
-		fmt.Println(res)
-*/
+		fmt.Println(res.Body)
+		defer res.Body.Close()
+		body, _ := ioutil.ReadAll(res.Body)
+
 		c.JSON(http.StatusOK, gin.H{
 			"status": "success",
-			//"data": ProvePackages,
+			"data": string(body),
 		})
 
 	} else {
@@ -238,7 +241,6 @@ func PostVerify(c *gin.Context) {
 		})
 
 	} else {
-		fmt.Println(verify)
 		c.JSON(http.StatusBadRequest, gin.H{
 			"status": "fail",
 			"message": "Bad request!",
