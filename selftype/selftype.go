@@ -40,17 +40,17 @@ type ProveRequired struct {
 
 type ProvePackage struct {
 	Type string `json:"type" example:"Disease"`
-	Code string `json:"code" example:"J0390"`
-	Prove string `json:"prove"`
-	Lowerbound int64 `json:"lowerbound" example:"20200503"`
-	Upperbound int64 `json:"upperbound" example:"20200531"`
+	Code string `json:"diseaseid" example:"J0390"`
+	Prove string `json:"proof"`
+	Lowerbound int64 `json:"lowBound" example:"20200503"`
+	Upperbound int64 `json:"upBound" example:"20200531"`
 	Commitment string `json:"commitment" example:"0x1af2e641e834f6c503e0e6b9b593323342e7d45ad0aa299bc934110a4e13ae2f33c3a0fc695f397d51e8b4699b4d9f9397b3bc3e20fa42cb1a540ff8f19dc118"`
 }
 
 type Verify struct {
 	//ProvePackages []ProvePackage `json:"provePackages"`
 	ProvePackage
-	UserName string `json:"userName" example:"\u738b\u6625\u5b0c"`
+	UserName string `json:"personName" example:"\u738b\u6625\u5b0c"`
 }
 
 type Event struct {
