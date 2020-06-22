@@ -105,6 +105,8 @@ func NewProve (c *gin.Context) {
 			ProvePackages = append(ProvePackages, ProvePackage) 
 		}
 
+		fmt.Println(ProvePackages)
+
 		jsonValue, _ := json.Marshal(ProvePackages)
 		jsonString := `{"provePackages":` + string(jsonValue) + "}"
 		jsonValue = []byte(jsonString)
@@ -140,10 +142,24 @@ func NewProve (c *gin.Context) {
 // @Router /verify [post]
 func PostVerify(c *gin.Context) {
 	verify := selftype.Verify{}
+	verify.Commitment = "0x100b92ff311c1f05dfbe31dbcd8f416245bb0ab7bd800afe7ecc402a5c2480fc4ee9f329d7d7ddb8ddab7f99fb25e3f439144046782d95795bf8c0726a24c3ec"
 
 	if c.BindJSON(&verify) == nil {
 		const layout = "20060102" // time format
 
+		if zsl.Verifier(verify.Commitment, verify.Lowerbound, verify.Upperbound, []byte(verify.Prove)) {
+			c.JSON(http.StatusOK, gin.H{
+				"status": "success",
+				"message": "Verify success with user name: " + verify.UserName,
+			})
+
+		}else {
+			c.JSON(http.StatusOK, gin.H{
+				"status": "success",
+				"message": "Verify fail with user name: " + verify.UserName,
+			})
+		}
+/*
 		result := make(chan bool, len(verify.ProvePackages))
 
 		for _, provePackage := range verify.ProvePackages {
@@ -161,18 +177,18 @@ func PostVerify(c *gin.Context) {
 				})
 				return
 			}
-		}
+		}*/
 /*
 		c.HTML(http.StatusOK, "new.tmpl", gin.H{
 			"title": "IT HOME again",
 		})*/
-
+/*
 		c.JSON(http.StatusOK, gin.H{
 			"status": "success",
 			//"message": "Verify success with user name: " + verify.UserName,
 			"message": "true",
 		})
-
+*/
 	} else {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"status": "fail",

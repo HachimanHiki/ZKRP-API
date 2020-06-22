@@ -48,7 +48,8 @@ type ProvePackage struct {
 }
 
 type Verify struct {
-	ProvePackages []ProvePackage `json:"provePackages"`
+	//ProvePackages []ProvePackage `json:"provePackages"`
+	ProvePackage
 	UserName string `json:"userName" example:"\u738b\u6625\u5b0c"`
 }
 
