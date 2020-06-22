@@ -19,6 +19,12 @@ func InitRouter() {
 
     router.NoRoute(api.NotFound)
     
+    router.LoadHTMLGlob("view/*")
+    router.GET("/", api.GetIndex)
+    router.GET("/test", func(c *gin.Context) {
+        c.HTML(200, "new.tmpl", nil)
+    })
+
     router.POST("/prove", api.NewProve)
     router.POST("/verify", api.PostVerify)
     router.POST("/event", api.PostEvent)

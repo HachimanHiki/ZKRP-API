@@ -39,7 +39,7 @@ type ProveRequired struct {
 }
 
 type ProvePackage struct {
-	Type string `json:"type" example:"Deagnosis"`
+	Type string `json:"type" example:"Disease"`
 	Code string `json:"code" example:"J0390"`
 	Prove string `json:"prove"`
 	Lowerbound int64 `json:"lowerbound" example:"20200503"`
@@ -49,7 +49,7 @@ type ProvePackage struct {
 
 type Verify struct {
 	ProvePackages []ProvePackage `json:"provePackages"`
-	//UserName string `json:"userName" example:"\u738b\u6625\u5b0c"`
+	UserName string `json:"userName" example:"\u738b\u6625\u5b0c"`
 }
 
 type Event struct {

@@ -27,6 +27,12 @@ func NotFound(c *gin.Context) {
     })
 }
 
+func GetIndex(c *gin.Context) {
+	c.HTML(http.StatusOK, "index.tmpl", gin.H{
+		"title": "IT HOME again",
+	})
+}
+
 func NewProve (c *gin.Context) {
 	proveRequired := selftype.ProveRequired{}
 
@@ -156,6 +162,10 @@ func PostVerify(c *gin.Context) {
 				return
 			}
 		}
+/*
+		c.HTML(http.StatusOK, "new.tmpl", gin.H{
+			"title": "IT HOME again",
+		})*/
 
 		c.JSON(http.StatusOK, gin.H{
 			"status": "success",

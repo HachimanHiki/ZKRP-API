@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Final Project: Defi</title>
+    <style>
+        .flex {
+            display: flex;
+        }
+
+        .item {
+            flex: 1;
+            padding: 2rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="flex">
+        <div class="item">
+            <h3>銀行合約</h3>
+            <h5 id="contractAddress">合約位址: </h5>
+            <input id="deployedContractAddressInput" type="text" placeholder="請輸入既有合約位址" />
+            <button id="loadDeployedContractButton">載入既有合約位址</button>
+            <button id="deployNewContractButton">部署新合約</button>
+
+            <hr>
+            <h3>帳戶登入</h3>
+            <select id="whoami"></select>
+            <button id="whoamiButton">登入</button>
+            <button id="copyButton">複製</button>
+
+            <hr>
+            <h3 id="accountStatus">帳戶狀態</h3>
+            <h5 id="ethBalance">以太帳戶餘額 (ETH): </h5>
+            <h5 id="accountTokenBalance">Token帳戶餘額: </h5>
+            <h5 id="borrowEtherBalance" style="color: red;">ETH借款額度 (ETH): </h5>
+            <h5 id="tokenBalance" style="color: red;">合約Token 餘額: </h5>
+            <h5 id="withdrawBalance" style="color: red;">可提領Token 餘額: </h5>
+            <h5 id="lockBalance" style="color: red;">上鎖Token 餘額: </h5>
+
+
+
+            <hr>
+            <h3 id="updateCoin">更新餘額</h3>
+            <button id="update">執行</button>
+
+            <!--
+			<hr>
+			<h3>存款至合約 (deposit)</h3>
+			<input id="deposit" type="number" placeholder="存款額度 (ETH)">
+			<button id="depositButton">執行</button>
+			-->
+
+            <hr>
+            <h3>事件名稱</h3>
+            <input id="borrow" type="text" placeholder="eventName">
+            <button onclick="getEvent()" id="event">生成QR Code</button>
+
+            <hr>
+            <h3>賣Ether (sell)</h3>
+            <input id="sell" type="number" placeholder="販賣額度 (Ether)">
+            <button id="sellButton">執行</button>
+            <hr>
+
+        </div>
+        <div class="item" style="width:500px;">
+            <h3>活動紀錄</h3>
+            <pre id="logger"></pre>
+            <h1>Hi {{.title}}</h1>
+        </div>
+    </div>
+
+    <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js'></script>
+    <script type="text/javascript">
+        let logger = $('#logger')
+
+        function log(...inputs) {
+            for (let input of inputs) {
+                if (typeof input === 'object') {
+                    input = JSON.stringify(input, null, 2)
+                }
+                logger.html(input + '\n' + logger.html())
+            }
+        }
+
+        function getEvent() {
+            $.ajax({
+                type: 'get',
+                url: '/event',
+                dataType: 'json',
+                data: {
+                    eventName: "marathon"
+                },
+                success: function (result) {
+                    log(result)
+                    console.log(result)
+                }
+            })
+        }
+    </script>
+</body>
+
+</html>
