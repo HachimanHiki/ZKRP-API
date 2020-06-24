@@ -28,6 +28,7 @@ func InitRouter() {
     router.POST("/prove", api.NewProve)
     router.POST("/verify", api.PostVerify)
     router.POST("/event", api.PostEvent)
+    router.GET("/event_qr", api.GetQRcode)
     router.GET("/event", api.GetEvent)
     router.DELETE("/event", api.DelEvent)
 

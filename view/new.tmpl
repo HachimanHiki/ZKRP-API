@@ -54,7 +54,7 @@
 			-->
 
             <hr>
-            <h3>事件名稱</h3>
+            <h3 class="qrcode">事件名稱</h3>
             <input id="borrow" type="text" placeholder="eventName">
             <button onclick="getEvent()" id="event">生成QR Code</button>
 
@@ -88,7 +88,7 @@
         function getEvent() {
             $.ajax({
                 type: 'get',
-                url: '/event',
+                url: '/event_qr',
                 dataType: 'json',
                 data: {
                     eventName: "marathon"
@@ -96,6 +96,7 @@
                 success: function (result) {
                     log(result)
                     console.log(result)
+                    $('.qrcode').html('<img src="data:image/png;base64,' + result.qrcode + '" />');
                 }
             })
         }
