@@ -204,13 +204,13 @@ func PostVerify(c *gin.Context) {
 		if zsl.Verifier(verify.Commitment, verify.Lowerbound, verify.Upperbound, []byte(verify.Prove)) {
 			c.JSON(http.StatusOK, gin.H{
 				"status": "success",
-				"message": "Verify success with user name: " + verify.UserName,
+				"message": "Verify fail with user name: " + verify.UserName,
 			})
 
 		}else {
 			c.JSON(http.StatusOK, gin.H{
 				"status": "success",
-				"message": "Verify fail with user name: " + verify.UserName,
+				"message": "Verify success with user name: " + verify.UserName,
 			})
 		}
 /*
