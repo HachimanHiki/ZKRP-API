@@ -31,9 +31,7 @@ func NotFound(c *gin.Context) {
 }
 
 func GetIndex(c *gin.Context) {
-	c.HTML(http.StatusOK, "index.tmpl", gin.H{
-		"title": "IT HOME again",
-	})
+	c.HTML(http.StatusOK, "new.html", nil)
 }
 
 func NewProve (c *gin.Context) {

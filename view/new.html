@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Final Project: Defi</title>
+    <title>Third party</title>
     <style>
         .flex {
             display: flex;
@@ -19,7 +19,7 @@
 <body>
     <div class="flex">
         <div class="item">
-            <h3>銀行合約</h3>
+            <h3>用戶合約</h3>
             <h5 id="contractAddress">合約位址: </h5>
             <input id="deployedContractAddressInput" type="text" placeholder="請輸入既有合約位址" />
             <button id="loadDeployedContractButton">載入既有合約位址</button>
@@ -32,43 +32,16 @@
             <button id="copyButton">複製</button>
 
             <hr>
-            <h3 id="accountStatus">帳戶狀態</h3>
-            <h5 id="ethBalance">以太帳戶餘額 (ETH): </h5>
-            <h5 id="accountTokenBalance">Token帳戶餘額: </h5>
-            <h5 id="borrowEtherBalance" style="color: red;">ETH借款額度 (ETH): </h5>
-            <h5 id="tokenBalance" style="color: red;">合約Token 餘額: </h5>
-            <h5 id="withdrawBalance" style="color: red;">可提領Token 餘額: </h5>
-            <h5 id="lockBalance" style="color: red;">上鎖Token 餘額: </h5>
-
-
-
-            <hr>
-            <h3 id="updateCoin">更新餘額</h3>
-            <button id="update">執行</button>
-
-            <!--
-			<hr>
-			<h3>存款至合約 (deposit)</h3>
-			<input id="deposit" type="number" placeholder="存款額度 (ETH)">
-			<button id="depositButton">執行</button>
-			-->
-
-            <hr>
             <h3 class="qrcode">事件名稱</h3>
-            <input id="borrow" type="text" placeholder="eventName">
+            <input id="eventName" type="text" placeholder="eventName">
             <button onclick="getEvent()" id="event">生成QR Code</button>
-
-            <hr>
-            <h3>賣Ether (sell)</h3>
-            <input id="sell" type="number" placeholder="販賣額度 (Ether)">
-            <button id="sellButton">執行</button>
             <hr>
 
         </div>
         <div class="item" style="width:500px;">
             <h3>活動紀錄</h3>
             <pre id="logger"></pre>
-            <h1>Hi {{.title}}</h1>
+            <h1>Hi</h1>
         </div>
     </div>
 
@@ -91,7 +64,7 @@
                 url: '/event_qr',
                 dataType: 'json',
                 data: {
-                    eventName: "marathon"
+                    eventName: $('#eventName').val()
                 },
                 success: function (result) {
                     log(result)
