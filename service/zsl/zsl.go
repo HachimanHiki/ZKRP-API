@@ -3,7 +3,7 @@ package zsl
 import (
 	"encoding/json"
 
-	"github.com/HachimanHiki/zkrpApi/zsl/zkrp"
+	"github.com/HachimanHiki/zkrpApi/service/zsl/zkrp"
 )
 
 // Committer amount

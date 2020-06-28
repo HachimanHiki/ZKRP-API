@@ -9,7 +9,7 @@ import (
 	"bytes"
 	"fmt"
 	
-	"github.com/HachimanHiki/zkrpApi/zsl"
+	"github.com/HachimanHiki/zkrpApi/service/zsl"
 	"github.com/HachimanHiki/zkrpApi/selftype"
 	"github.com/gin-gonic/gin"
 )
