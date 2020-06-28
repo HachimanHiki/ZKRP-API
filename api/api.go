@@ -23,7 +23,7 @@ var (
 	allEvent map[string]selftype.Event
 	userHashRoot map[string]string
 	resultStatus bool = false
-	resultMessage string = ""
+	resultMessage []string
 )
 
 // NotFound godoc
@@ -47,6 +47,7 @@ func GetResult(c *gin.Context) {
 		})
 
 		resultStatus = false
+		resultMessage = resultMessage[:0]
 
 	}else{
 		c.JSON(http.StatusBadRequest, gin.H{
@@ -115,15 +116,21 @@ func VerifyMerkleTreeRoot(c *gin.Context) {
 		}
 
 		if userHashRoot[verifyMerkleTree.UserName] == service.GenerateMerkleTreeRoot(hashArray) {
+			resultStatus = true
+			resultMessage = append(resultMessage, "Merkle tree verify successful with user name: " + verifyMerkleTree.UserName)
+
 			c.JSON(http.StatusOK, gin.H{
 				"status": "success",
 				"message": "verify success with user name: " + verifyMerkleTree.UserName,
 			})
 
 		} else {
+			resultStatus = true
+			resultMessage = append(resultMessage, "Merkle tree verify failure with user name: " + verifyMerkleTree.UserName)
+
 			c.JSON(http.StatusOK, gin.H{
 				"status": "success",
-				"message": "verify fail with user name: " + verifyMerkleTree.UserName,
+				"message": "verify failure with user name: " + verifyMerkleTree.UserName,
 			})
 		}
 
@@ -261,16 +268,16 @@ func PostVerify(c *gin.Context) {
 
 		if zsl.Verifier(verify.Commitment, verify.Lowerbound, verify.Upperbound, []byte(verify.Prove)) {
 			resultStatus = true
-			resultMessage = "Verify fail with user name: " + verify.UserName
+			resultMessage = append(resultMessage, "ZKRP verify failure with user name: " + verify.UserName) 
 
 			c.JSON(http.StatusOK, gin.H{
 				"status": "success",
-				"message": "Verify fail with user name: " + verify.UserName,
+				"message": "Verify failure with user name: " + verify.UserName,
 			})
 
 		}else {
 			resultStatus = true
-			resultMessage = "Verify success with user name: " + verify.UserName
+			resultMessage = append(resultMessage, "ZKRP verify successful with user name: " + verify.UserName) 
 
 			c.JSON(http.StatusOK, gin.H{
 				"status": "success",
