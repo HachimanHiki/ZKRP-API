@@ -9,6 +9,17 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// PostMerkleTreeRoot godoc
+// @Tags MerkleTree 
+// @Summary Add/Update user's merkleTreeRoot
+// @Description Return user's merkleTreeRoot
+// @Accept  application/json
+// @Produce  application/json
+// @Param medicineUsages body []selftype.MedicineUsage true "[]MedicineUsage"
+// @Param userName body string true "userName"
+// @Success 200 {object} selftype.JSONResponse
+// @Failure 400 {object} selftype.JSONResponse
+// @Router /merkletree [post]
 func PostMerkleTreeRoot(c *gin.Context) {
 	merkleTreeRequire := selftype.MerkleTreeRequire{}
 
@@ -38,6 +49,18 @@ func PostMerkleTreeRoot(c *gin.Context) {
 	}
 }
 
+// VerifyMerkleTreeRoot godoc
+// @Tags MerkleTree 
+// @Summary Verify merkle tree root
+// @Description Return result of verification
+// @Accept  json
+// @Produce  json
+// @Param medicineUsages body []selftype.MedicineUsage true "[]MedicineUsage"
+// @Param userName body string true "userName"
+// @Param hashArray body []string true "[]hashArray"
+// @Success 200 {object} selftype.EventResponse
+// @Failure 400 {object} selftype.JSONResponse
+// @Router /merkletree [get]
 func VerifyMerkleTreeRoot(c *gin.Context) {
 	verifyMerkleTree := selftype.VerifyMerkleTree{}
 
@@ -56,15 +79,15 @@ func VerifyMerkleTreeRoot(c *gin.Context) {
 		for _, medicineUsage := range verifyMerkleTree.MedicineUsages {
 
 			for len(hashArray) != (medicineUsage.ID - 1) {
-				hashArray = append(hashArray, verifyMerkleTree.HashArray[0])
-				verifyMerkleTree.HashArray = verifyMerkleTree.HashArray[1:]
+				hashArray = append(hashArray, verifyMerkleTree.HashArray[len(verifyMerkleTree.HashArray)-1])
+				verifyMerkleTree.HashArray = verifyMerkleTree.HashArray[:len(verifyMerkleTree.HashArray)-1]
 			}
 			hashArray = append(hashArray, service.GenerateHashFromStruct(medicineUsage))
 		}
 
 		for len(verifyMerkleTree.HashArray) != 0 {
-			hashArray = append(hashArray, verifyMerkleTree.HashArray[0])
-			verifyMerkleTree.HashArray = verifyMerkleTree.HashArray[1:]
+			hashArray = append(hashArray, verifyMerkleTree.HashArray[len(verifyMerkleTree.HashArray)-1])
+			verifyMerkleTree.HashArray = verifyMerkleTree.HashArray[:len(verifyMerkleTree.HashArray)-1]
 		}
 
 		if userHashRoot[verifyMerkleTree.UserName] == service.GenerateMerkleTreeRoot(hashArray) {
