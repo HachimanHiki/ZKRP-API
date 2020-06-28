@@ -1,15 +1,24 @@
 ## ZkrpApi
 
-### Install required module & compile
+### Start 
+
+#### 1. Direct Start
+
+```
+$ go run main.go
+```
+
+#### 2. Compile and Start
 
 ```
 $ go build .
-```
-
-### Start
-
-```
 $ ./zkrpApi
+```
+
+### Update API Docs
+
+```
+$ swag init
 ```
 
 ### API Docs
