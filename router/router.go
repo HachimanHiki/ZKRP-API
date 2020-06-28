@@ -23,6 +23,8 @@ func InitRouter() {
     router.GET("/", api.GetIndex)
     router.GET("/result", api.GetResult)
 
+    router.POST("/merkletree", api.PostMerkleTreeRoot)
+    router.GET("/merkletree", api.VerifyMerkleTreeRoot)
     router.POST("/prove", api.NewProve)
     router.POST("/verify", api.PostVerify)
     router.POST("/event", api.PostEvent)

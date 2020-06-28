@@ -1,5 +1,24 @@
 package selftype
 
+type MedicineUsage struct {
+	ID int `json:"id"`
+	MedID string `json:"medId"`
+	MedName string `json:"medName"`
+	Amount string `json:"amount"`
+	Days string  `json:"days"`
+	MedicalDate string `json:"medicalDate"`
+}
+
+type MerkleTreeRequire struct {
+	MedicineUsages []MedicineUsage
+	UserName string `json:"personName" example:"\u738b\u6625\u5b0c"`
+}
+
+type VerifyMerkleTree struct {
+	MerkleTreeRequire
+	HashArray []string `json:"hashArray"`
+}
+
 type DiseaseInfo struct {
 	DiseaseID string `json:"diseaseId" example:"R"`
 	DiseaseName string `json:"diseaseName" example:"\u75f0\u7570\u5e38"`
