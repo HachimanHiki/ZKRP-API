@@ -21,6 +21,7 @@ func InitRouter() {
     
     router.LoadHTMLGlob("view/*")
     router.GET("/", api.GetIndex)
+    router.GET("/result", api.GetResult)
 
     router.POST("/prove", api.NewProve)
     router.POST("/verify", api.PostVerify)

@@ -35,13 +35,16 @@
             <h3 class="qrcode">事件名稱</h3>
             <input id="eventName" type="text" placeholder="eventName">
             <button onclick="getEvent()" id="event">生成QR Code</button>
+
+            <hr>
+            <h3 class="qrcode">更新驗證紀錄</h3>
+            <button onclick="getResult()" id="update">更新</button>
             <hr>
 
         </div>
         <div class="item" style="width:500px;">
-            <h3>活動紀錄</h3>
+            <h3>驗證紀錄</h3>
             <pre id="logger"></pre>
-            <h1>Hi</h1>
         </div>
     </div>
 
@@ -67,9 +70,20 @@
                     eventName: $('#eventName').val()
                 },
                 success: function (result) {
-                    log(result)
-                    console.log(result)
+                    //log(result)
                     $('.qrcode').html('<img src="data:image/png;base64,' + result.qrcode + '" />');
+                }
+            })
+        }
+
+        function getResult() {
+            $.ajax({
+                type: 'get',
+                url: '/result',
+                dataType: 'json',
+                data: {},
+                success: function (result) {
+                    log(result)
                 }
             })
         }

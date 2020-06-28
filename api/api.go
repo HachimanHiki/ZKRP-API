@@ -20,6 +20,8 @@ import (
 
 var (
 	allEvent map[string]selftype.Event
+	resultStatus bool = false
+	resultMessage string = ""
 )
 
 // NotFound godoc
@@ -32,6 +34,24 @@ func NotFound(c *gin.Context) {
 
 func GetIndex(c *gin.Context) {
 	c.HTML(http.StatusOK, "new.html", nil)
+}
+
+func GetResult(c *gin.Context) {
+
+	if(resultStatus == true){
+		c.JSON(http.StatusOK, gin.H{
+			"status": resultStatus,
+			"message": resultMessage,
+		})
+
+		resultStatus = false
+
+	}else{
+		c.JSON(http.StatusBadRequest, gin.H{
+			"status": "fail",
+			"message": "Bad request!",
+		})
+	}
 }
 
 func NewProve (c *gin.Context) {
@@ -159,12 +179,18 @@ func PostVerify(c *gin.Context) {
 		const layout = "20060102" // time format
 
 		if zsl.Verifier(verify.Commitment, verify.Lowerbound, verify.Upperbound, []byte(verify.Prove)) {
+			resultStatus = true
+			resultMessage = "Verify fail with user name: " + verify.UserName
+
 			c.JSON(http.StatusOK, gin.H{
 				"status": "success",
 				"message": "Verify fail with user name: " + verify.UserName,
 			})
 
 		}else {
+			resultStatus = true
+			resultMessage = "Verify success with user name: " + verify.UserName
+
 			c.JSON(http.StatusOK, gin.H{
 				"status": "success",
 				"message": "Verify success with user name: " + verify.UserName,
