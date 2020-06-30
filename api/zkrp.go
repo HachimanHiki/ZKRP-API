@@ -145,6 +145,7 @@ func PostVerify(c *gin.Context) {
 			c.JSON(http.StatusOK, gin.H{
 				"status": "success",
 				"message": "Verify failure with user name: " + verify.UserName,
+				"data": verify.Code,
 			})
 
 		}else {
