@@ -19,12 +19,14 @@ func InitRouter() {
 
     router.NoRoute(api.NotFound)
     
-    router.LoadHTMLGlob("view/*")
+    router.LoadHTMLGlob("view/html/*")
+    router.Static("/css", "view/asset")
     router.GET("/", api.GetIndex)
+    router.GET("/marathon", api.GetMarathon)
     router.GET("/result", api.GetResult)
 
-    router.POST("/merkletree", api.PostMerkleTreeRoot)
-    router.GET("/merkletree", api.VerifyMerkleTreeRoot)
+    //router.POST("/merkletree", api.PostMerkleTreeRoot)
+    router.POST("/merkletree", api.VerifyMerkleTreeRoot)
     router.POST("/prove", api.NewProve)
     router.POST("/verify", api.PostVerify)
     router.POST("/event", api.PostEvent)

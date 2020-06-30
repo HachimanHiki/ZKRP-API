@@ -1,0 +1,119 @@
+<head>
+    <meta charset="UTF-8">
+    <title>Third party</title>
+    <link rel="stylesheet" href="/css/marathon.css">
+    <style>
+      .flex {
+        display: flex;
+      }
+  
+      .item {
+        flex: 1;
+        padding: 2rem;
+      }
+    </style>
+  </head>
+  
+  <section class='barTop'>
+    <section class='navSection'>
+      <div class='logo'>Marathon</div>
+      <div class='login'>
+        <a href='#'>Morning, Ricky!</a>
+      </div>
+    </section>
+  </section>
+  
+  <section class='container'>
+    <section class='content'>
+      <div class='contentChoice'>
+        <span>YOUR BUCKET</span>
+        <span>-</span>
+        <a href='#'>FRIENDS</a>
+      </div>
+
+      <article>
+        <section class='page-cont'>
+            <h2>活動說明</h2>
+        </section>
+      </article>
+  
+      <article>
+        <section class='page-cont'>
+            <h2>驗證所需資料</h2>
+        </section>
+      </article>
+  
+      <article>
+        <section class='page-cont'>
+            <h2>QRCODE</h2>
+            <p>請使用健保App掃描此QRCODE</p>
+        </section>
+      </article>
+  
+      <article>
+        <section class='right'>
+          <h3 class="qrcode"></h3>
+        </section>
+      </article>
+  
+    </section>
+  
+    <aside>
+      <section class='friends'>
+        <h2>驗證紀錄</h2>
+        <button onclick="getResult()" id="update">更新</button>
+        <button onclick="cleanLog()" id="update">清除</button>
+        <pre id="logger"></pre>
+      </section>
+    </aside>
+  </section>
+  
+  <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js'></script>
+  <script type="text/javascript">
+    let logger = $('#logger')
+  
+    function log(...inputs) {
+      for (let input of inputs) {
+        if (typeof input === 'object') {
+          input = JSON.stringify(input, null, 2)
+        }
+        logger.html(input + '\n' + logger.html())
+      }
+    }
+
+    function cleanLog() {
+        logger.html('\n')
+    }
+  
+    getEvent()
+  
+    function getEvent() {
+      $.ajax({
+        type: 'get',
+        url: '/event_qr',
+        dataType: 'json',
+        data: {
+          eventName: "marathon"
+        },
+        success: function (result) {
+          //log(result)
+          $('.qrcode').html('<img src="data:image/png;base64,' + result.qrcode + '" />');
+        }
+      })
+    }
+  
+    function getResult() {
+      $.ajax({
+        type: 'get',
+        url: '/result',
+        dataType: 'json',
+        data: {},
+        success: function (result) {
+          result.message.forEach(element => {
+            log("")
+            log(element)
+          })
+        }
+      })
+    }
+  </script>

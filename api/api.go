@@ -31,6 +31,10 @@ func GetIndex(c *gin.Context) {
 	c.HTML(http.StatusOK, "new.html", nil)
 }
 
+func GetMarathon(c *gin.Context) {
+	c.HTML(http.StatusOK, "marathon.html", nil)
+}
+
 func GetResult(c *gin.Context) {
 
 	if(resultStatus == true){
