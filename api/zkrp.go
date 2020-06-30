@@ -139,8 +139,8 @@ func PostVerify(c *gin.Context) {
 		const layout = "20060102" // time format
 
 		if zsl.Verifier(verify.Commitment, verify.Lowerbound, verify.Upperbound, []byte(verify.Prove)) {
-			resultStatus = true
-			resultMessage = append(resultMessage, "ZKRP verify failure with user name: " + verify.UserName) 
+			zkrpResultStatus = true
+			zkrpResultMessage = append(zkrpResultMessage, "ZKRP verify failure with user name: " + verify.UserName) 
 
 			c.JSON(http.StatusOK, gin.H{
 				"status": "success",
@@ -149,8 +149,8 @@ func PostVerify(c *gin.Context) {
 			})
 
 		}else {
-			resultStatus = true
-			resultMessage = append(resultMessage, "ZKRP verify successful with user name: " + verify.UserName) 
+			zkrpResultStatus = true
+			zkrpResultMessage = append(zkrpResultMessage, "ZKRP verify successful with user name: " + verify.UserName) 
 
 			c.JSON(http.StatusOK, gin.H{
 				"status": "success",

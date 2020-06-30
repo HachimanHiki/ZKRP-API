@@ -15,8 +15,10 @@ import (
 var (
 	allEvent map[string]selftype.Event
 	userHashRoot map[string]string
-	resultStatus bool = false
-	resultMessage []string
+	zkrpResultStatus bool = false
+	zkrpResultMessage []string
+	shareResultStatus bool = false
+	shareResultMessage []string
 )
 
 // NotFound godoc
@@ -35,16 +37,39 @@ func GetMarathon(c *gin.Context) {
 	c.HTML(http.StatusOK, "marathon.html", nil)
 }
 
-func GetResult(c *gin.Context) {
+func GetShare(c *gin.Context) {
+	c.HTML(http.StatusOK, "share.html", nil)
+}
 
-	if(resultStatus == true){
+func GetZkrpResult(c *gin.Context) {
+
+	if(zkrpResultStatus == true){
 		c.JSON(http.StatusOK, gin.H{
-			"status": resultStatus,
-			"message": resultMessage,
+			"status": zkrpResultStatus,
+			"message": zkrpResultMessage,
 		})
 
-		resultStatus = false
-		resultMessage = resultMessage[:0]
+		zkrpResultStatus = false
+		zkrpResultMessage = zkrpResultMessage[:0]
+
+	}else{
+		c.JSON(http.StatusBadRequest, gin.H{
+			"status": "fail",
+			"message": "Bad request!",
+		})
+	}
+}
+
+func GetShareResult(c *gin.Context) {
+
+	if(shareResultStatus == true){
+		c.JSON(http.StatusOK, gin.H{
+			"status": shareResultStatus,
+			"message": shareResultMessage,
+		})
+
+		shareResultStatus = false
+		shareResultMessage = shareResultMessage[:0]
 
 	}else{
 		c.JSON(http.StatusBadRequest, gin.H{
@@ -72,6 +97,7 @@ func GetQRcode (c *gin.Context) {
 			allEvent = make(map[string]selftype.Event)
 		}
 		allEvent["marathon"] = selftype.Event{}
+		allEvent["share"] = selftype.Event{}
 		//
 		if _, ok := allEvent[eventName]; ok {
 			

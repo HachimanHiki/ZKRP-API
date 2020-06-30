@@ -23,7 +23,9 @@ func InitRouter() {
     router.Static("/css", "view/asset")
     router.GET("/", api.GetIndex)
     router.GET("/marathon", api.GetMarathon)
-    router.GET("/result", api.GetResult)
+    router.GET("/share", api.GetShare)
+    router.GET("/result/zkrp", api.GetZkrpResult)
+    router.GET("/result/share", api.GetShareResult)
 
     //router.POST("/merkletree", api.PostMerkleTreeRoot)
     router.POST("/merkletree", api.VerifyMerkleTreeRoot)
