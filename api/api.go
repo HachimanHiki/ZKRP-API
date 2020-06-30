@@ -67,6 +67,12 @@ func GetResult(c *gin.Context) {
 func GetQRcode (c *gin.Context) {
 	eventName := c.Query("eventName")
 	if len(eventName) > 0 {
+		// for demo
+		if allEvent == nil {
+			allEvent = make(map[string]selftype.Event)
+		}
+		allEvent["marathonzkrp"] = selftype.Event{}
+		//
 		if _, ok := allEvent[eventName]; ok {
 			
 			qrCode, _ := qr.Encode("http://localhost:8080/event?eventName=" + eventName, qr.M, qr.Auto)

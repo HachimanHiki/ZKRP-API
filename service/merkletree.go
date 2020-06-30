@@ -2,6 +2,7 @@ package service
 
 import (
 	"crypto/sha256"
+	"encoding/json"
 	"fmt"
 
 	"github.com/HachimanHiki/zkrpApi/selftype"
@@ -9,8 +10,9 @@ import (
 
 func GenerateHashFromStruct(medicineUsage selftype.MedicineUsage) string {
 	h := sha256.New()
-	h.Write([]byte(fmt.Sprintf("%v", medicineUsage)))
-
+	j, _ := json.Marshal(medicineUsage)
+	fmt.Println(string(j))
+	h.Write([]byte(j))
 	return fmt.Sprintf("%x", h.Sum(nil))
 	//return h.Sum(nil)
 }
