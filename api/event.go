@@ -29,7 +29,7 @@ func PostEvent (c *gin.Context) {
 			allEvent = make(map[string]selftype.Event)
 		}
 
-		allEvent[event.EventName + event.EventType] = event
+		allEvent[event.EventName] = event
 
 		c.JSON(http.StatusOK, gin.H{
 			"status": "success",
@@ -69,7 +69,7 @@ func GetEvent (c *gin.Context) {
 		RequireDays: 28,
 	}
 
-	allEvent["marathonzkrp"] = selftype.Event{
+	allEvent["marathon"] = selftype.Event{
 		EventName: "marathon",
 		EventInfo: "強化主動防疫 我們需要您提供28天內住院與手術資料我們將從您的健康存摺加密處理後交給馬拉松中心進行第三方驗證 確定您是否符合馬拉松資格",
 		EventType: "zkrp",
@@ -77,8 +77,8 @@ func GetEvent (c *gin.Context) {
 		VarifyURL: "http://localhost:8080/verify",
 	}
 
-	allEvent["marathonmerkletree"] = selftype.Event{
-		EventName: "marathon",
+	allEvent["share"] = selftype.Event{
+		EventName: "share",
 		EventInfo: "強化主動防疫 我們需要您提供28天內住院與手術資料我們將從您的健康存摺加密處理後交給馬拉松中心進行第三方驗證 確定您是否符合馬拉松資格",
 		EventType: "merkletree",
 		VarifyURL: "http://localhost:8080/verify",

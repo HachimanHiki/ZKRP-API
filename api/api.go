@@ -71,7 +71,7 @@ func GetQRcode (c *gin.Context) {
 		if allEvent == nil {
 			allEvent = make(map[string]selftype.Event)
 		}
-		allEvent["marathonzkrp"] = selftype.Event{}
+		allEvent["marathon"] = selftype.Event{}
 		//
 		if _, ok := allEvent[eventName]; ok {
 			
