@@ -29,7 +29,7 @@ func PostEvent (c *gin.Context) {
 			allEvent = make(map[string]selftype.Event)
 		}
 
-		allEvent[event.EventName] = event
+		allEvent[event.EventName + event.EventType] = event
 
 		c.JSON(http.StatusOK, gin.H{
 			"status": "success",
@@ -56,7 +56,35 @@ func PostEvent (c *gin.Context) {
 // @Router /event/{eventName} [get]
 func GetEvent (c *gin.Context) {
 	eventName := c.Query("eventName")
-	
+
+	// for demo
+	if allEvent == nil {
+		allEvent = make(map[string]selftype.Event)
+	}
+
+	var diseaseInfoSlice []selftype.DiseaseInfo
+	diseaseInfo := selftype.DiseaseInfo {
+		DiseaseID: "R",
+		DiseaseName: "\u75f0\u7570\u5e38",
+		RequireDays: 28,
+	}
+
+	allEvent["marathonzkrp"] = selftype.Event{
+		EventName: "marathon",
+		EventInfo: "強化主動防疫 我們需要您提供28天內住院與手術資料我們將從您的健康存摺加密處理後交給馬拉松中心進行第三方驗證 確定您是否符合馬拉松資格",
+		EventType: "zkrp",
+		DiseaseInfo: append(diseaseInfoSlice, diseaseInfo),
+		VarifyURL: "http://localhost:8080/verify",
+	}
+
+	allEvent["marathonmerkletree"] = selftype.Event{
+		EventName: "marathon",
+		EventInfo: "強化主動防疫 我們需要您提供28天內住院與手術資料我們將從您的健康存摺加密處理後交給馬拉松中心進行第三方驗證 確定您是否符合馬拉松資格",
+		EventType: "merkletree",
+		VarifyURL: "http://localhost:8080/verify",
+	}
+	//
+
 	if len(eventName) > 0 {
 		if _, ok := allEvent[eventName]; ok {
 			c.JSON(http.StatusOK, gin.H{
