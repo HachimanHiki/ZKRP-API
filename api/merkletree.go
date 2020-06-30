@@ -69,21 +69,22 @@ func VerifyMerkleTreeRoot(c *gin.Context) {
 		if userHashRoot == nil {
 			userHashRoot = make(map[string]string)
 		}
-		userHashRoot["\u738b\u6625\u5b0c"] = "dffb0a974110005d6fed4e17c8c29619cb50e9df0b3bc0a633cd80b317b9a36d"
-		userHashRoot["\u674e\u5c0f\u8c6a"] = "22916c7ae2af50553a8cded598ca4f1917585d1d55ac2f265f7888f0054e5adf"
-		userHashRoot["\u5f35\u5fd7\u660e"] = "2eb1eb753e41af3c3c19f0830834db24317fa30d521a7d70e86bb1086f0d628d"
+		userHashRoot["\u738b\u6625\u5b0c"] = "144395288b617a54e0eda5706c41857ecbb39b113bad83515c01fef20a6b3eb6"
+		userHashRoot["\u674e\u5c0f\u8c6a"] = "fca3a82e4f649975626bb40a45442c381b2ee9f38699e6ff0af03c649b90d8a7"
+		userHashRoot["\u5f35\u5fd7\u660e"] = "40a388b578be1a7443ba1258ac761f09bfd821aebb694e5109ee9035c30b3fef"
 		// 
 
 		var hashArray []string
 
-		for _, medicineUsage := range verifyMerkleTree.MedicineUsages {
+		for i := len(verifyMerkleTree.MedicineUsages) - 1 ; i >= 0 ; i-- {
+			medicineUsage := verifyMerkleTree.MedicineUsages[i]
 
 			for len(hashArray) != (medicineUsage.ID - 1) {
 				hashArray = append(hashArray, verifyMerkleTree.HashArray[len(verifyMerkleTree.HashArray)-1])
 				verifyMerkleTree.HashArray = verifyMerkleTree.HashArray[:len(verifyMerkleTree.HashArray)-1]
 			}
 			hashArray = append(hashArray, service.GenerateHashFromStruct(medicineUsage))
-		}
+		} 
 
 		for len(verifyMerkleTree.HashArray) != 0 {
 			hashArray = append(hashArray, verifyMerkleTree.HashArray[len(verifyMerkleTree.HashArray)-1])
