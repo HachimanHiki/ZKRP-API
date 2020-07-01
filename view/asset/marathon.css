@@ -22,7 +22,7 @@ body {
     margin: 0 auto;
   }
   
-  .logo, .login {
+  .logo {
     line-height: 40px;
   }
   
@@ -30,13 +30,6 @@ body {
     float: left;
     color: #37abc8;
     font-size: 1.25em;
-    font-weight: bold;
-  }
-  
-  .login {
-    float: right;
-    font-size: .7em;
-    transition: all .3s ease-in-out;
     font-weight: bold;
   }
   /* END FIXED BAR */
@@ -231,7 +224,153 @@ body {
   nav ul li:last-child:after {
     content: "";
   }
+
+  .header {
+    position: relative;
+    background-color: #60B1CE;
+    width: 100%;
+    z-index: 999;
+  }
+
+  .logo-box {
+    width: 260px;
+    height: 260px;
+    position: absolute;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    overflow: hidden;
+  }
+
+  h1.logo {
+    width: 156px;
+    height: 156px;
+    background-position: center;
+    background-size: cover;
+    position: absolute;
+    margin-left: 0px;
+    margin-top: 0px;
+    background-image: url(https://lh3.googleusercontent.com/proxy/bXWbFDLxxBiZDs_KvcE9sVLNAq78nsrDx-zZWftXH8koQ_9ctlCWMRwzRuQ3LPCxpBfzMYip_of2mrHbX2ur5HVJ_jKZFu60S9fKp_aP2YWUdfy6MIJMYfg);
+  }
+
+  .nav-box {
+    margin: 0;
+    padding: 0;
+  }
+
+  .sns {
+    height: 30px;
+    background-color: #0099B2;
+    text-align: right;
+  }
+
+  .sns a.lang {
+    color: #FFF;
+  }
+
+  .sns a {
+    width: 30px;
+    height: 30px;
+    display: inline-block;
+    text-align: center;
+    margin-right: 10px;
+    background-position: center;
+    background-size: 50%;
+    background-repeat: no-repeat;
+    line-height: 30px;
+  }
+
+  .nav-bar-new {
+    padding-top: 10px;
+    padding-left: 270px;
+    background-color: #60B1CE;
+    position: relative;
+    z-index: 9998;
+  }
+
+  ul.nav-new {
+    list-style: none;
+    text-align: left;
+    margin-top: 0;
+    margin-bottom: 10px;
+  }
+
+  ul.nav-new li {
+    text-align: center;
+    width: 120px;
+    margin-right: 5px;
+    border-radius: 20px 20px 0px 0px;
+    font-size: 16px;
+    border-left: #FFF 1px solid;
+    border-right: #FFF 1px solid;
+    border-top: #FFF 1px solid;
+    height: 55px;
+    display: inline-block;
+  }
+
+  ul.nav-new li p {
+    color: #FFF;
+    display: block;
+  }
+
+  ul.nav-new li.on-item {
+    background-color: #CED8D7;
+    border-top-color: #CED8D7;
+    border-right-color: #CED8D7;
+    border-left-color: #CED8D7;
+    color: #60B1CE;
+  }
+
+  ul.nav-new li.on-item p {
+    color: #60B1CE;
+  }
+
+  ul.nav-new li.on-item .sub-nav-new {
+    height: 60px;
+    z-index: 0;
+    opacity: 1;
+  }
+
+  ul.nav-new li .sub-nav-new {
+    width: 100%;
+    background-color: #CED8D7;
+    position: absolute;
+    margin-top: -17px;
+    padding-top: 0px;
+    padding-left: 270px;
+    left: 0px;
+    text-align: left;
+    height: 0px;
+    overflow: hidden;
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s;
+    transition-delay: 0.1s;
+    transition-timing-function: ease-in-out;
+    z-index: 1;
+    opacity: 0;
+}
+
+  ul.nav-new li .sub-nav-new p {
+    float: left;
+    margin-right: 15px;
+    margin-left: 15px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    color: #666;
+    background-image: url(http://www.taipeicitymarathon.com/img/sub-nav-bkg.png);
+    background-size: 0% 2px;
+    background-position: center 45px;
+    background-repeat: repeat-x;
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s;
+    margin-top: 0px;
+    margin-bottom: 0px;
+  }
   
+  ul.nav-new li .sub-nav-new p.on-page {
+    color: #0099B2;
+    background-size: 100% 2px;
+}
   /* Article Section */
   
   article {

@@ -80,7 +80,7 @@ func GetEvent (c *gin.Context) {
 	allEvent["share"] = selftype.Event{
 		EventName: "share",
 		EventInfo: "強化主動防疫 我們需要您提供28天內住院與手術資料我們將從您的健康存摺加密處理後交給馬拉松中心進行第三方驗證 確定您是否符合馬拉松資格",
-		EventType: "merkleTree",
+		EventType: "merkletree",
 		VarifyURL: "http://140.119.19.121:8080/verify",
 	}
 	//
