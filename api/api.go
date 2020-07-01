@@ -101,7 +101,7 @@ func GetQRcode (c *gin.Context) {
 		//
 		if _, ok := allEvent[eventName]; ok {
 			
-			qrCode, _ := qr.Encode("http://localhost:8080/event?eventName=" + eventName, qr.M, qr.Auto)
+			qrCode, _ := qr.Encode("http://140.119.19.121:8080/event?eventName=" + eventName, qr.M, qr.Auto)
 
 			// Scale the barcode to 200x200 pixels
 			qrCode, _ = barcode.Scale(qrCode, 200, 200)
