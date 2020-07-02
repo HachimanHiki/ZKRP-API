@@ -149,7 +149,12 @@
         result.message.forEach(element => {
           log("")
           log(element)
-          swal("Success!", element, "success")
+          if(element.split(' ')[2] === "successful"){
+            swal(element.split(' ')[6], element.split(' ')[2], "success")
+          }
+          else{
+            swal(element.split(' ')[6], element.split(' ')[2], "error")
+          }
         })
       }
     })

@@ -97,7 +97,7 @@ func VerifyMerkleTreeRoot(c *gin.Context) {
 
 			c.JSON(http.StatusOK, gin.H{
 				"status": "success",
-				"message": "verify success with user name: " + verifyMerkleTree.UserName,
+				"message": "verify successful with user name: " + verifyMerkleTree.UserName,
 			})
 
 		} else {

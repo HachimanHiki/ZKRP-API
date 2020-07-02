@@ -154,7 +154,7 @@ func PostVerify(c *gin.Context) {
 
 			c.JSON(http.StatusOK, gin.H{
 				"status": "success",
-				"message": "Verify success with user name: " + verify.UserName,
+				"message": "Verify successful with user name: " + verify.UserName,
 			})
 		}
 /*
@@ -183,7 +183,7 @@ func PostVerify(c *gin.Context) {
 /*
 		c.JSON(http.StatusOK, gin.H{
 			"status": "success",
-			//"message": "Verify success with user name: " + verify.UserName,
+			//"message": "Verify successful with user name: " + verify.UserName,
 			"message": "true",
 		})
 */
