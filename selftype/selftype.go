@@ -10,7 +10,7 @@ type MedicineUsage struct {
 }
 
 type MerkleTreeRequire struct {
-	MedicineUsages []MedicineUsage
+	MedicineUsages []MedicineUsage `json:"medicineUsages"`
 	UserName string `json:"personName" example:"\u738b\u6625\u5b0c"`
 }
 

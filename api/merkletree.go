@@ -3,6 +3,7 @@ package api
 import (
 	"fmt"
 	"net/http"
+	"encoding/json"
 	
 	"github.com/HachimanHiki/zkrpApi/service"
 	"github.com/HachimanHiki/zkrpApi/selftype"
@@ -22,12 +23,12 @@ import (
 // @Router /merkletree [post]
 func PostMerkleTreeRoot(c *gin.Context) {
 	merkleTreeRequire := selftype.MerkleTreeRequire{}
-
+	
 	if c.BindJSON(&merkleTreeRequire) == nil {
 		var hashArray []string
-
 		for _, medicineUsage := range merkleTreeRequire.MedicineUsages {
-			hashArray = append(hashArray, service.GenerateHashFromStruct(medicineUsage))
+			j, _ := json.Marshal(medicineUsage)
+			hashArray = append(hashArray, service.GenerateHashFromString(string(j)))
 		}
 
 		if userHashRoot == nil {
@@ -83,7 +84,8 @@ func VerifyMerkleTreeRoot(c *gin.Context) {
 				hashArray = append(hashArray, verifyMerkleTree.HashArray[len(verifyMerkleTree.HashArray)-1])
 				verifyMerkleTree.HashArray = verifyMerkleTree.HashArray[:len(verifyMerkleTree.HashArray)-1]
 			}
-			hashArray = append(hashArray, service.GenerateHashFromStruct(medicineUsage))
+			j, _ := json.Marshal(medicineUsage)
+			hashArray = append(hashArray, service.GenerateHashFromString(string(j)))
 		} 
 
 		for len(verifyMerkleTree.HashArray) != 0 {
