@@ -3,11 +3,12 @@ package service
 import (
 	"crypto/sha256"
 	"fmt"
+	"encoding/json"
 
-
+	"github.com/HachimanHiki/zkrpApi/selftype"
 )
 
-func GenerateHashFromString(s string) string {
+func GenerateHashFromJsonString(s string) string {
 	h := sha256.New()
 	h.Write([]byte(s))
 	return fmt.Sprintf("%x", h.Sum(nil))
@@ -39,4 +40,48 @@ func GenerateMerkleTreeRoot(hashArray []string) string {
 
 	return GenerateMerkleTreeRoot(newArray)
 	
+}
+
+func GenerateHashFromStructAndHash(informathionArray interface{}, hashArray []string) string{
+	var tmpHashArray []string
+
+	switch iType := informathionArray.(type) {
+		case []selftype.MedicineUsage:
+			for i := len(iType) - 1 ; i >= 0 ; i-- {
+		
+				informathion := iType[i]		
+		
+				for len(tmpHashArray) != (informathion.ID - 1) {
+					tmpHashArray = append(tmpHashArray, hashArray[len(hashArray)-1])
+					hashArray = hashArray[:len(hashArray)-1]
+				}
+				j, _ := json.Marshal(informathion)
+				tmpHashArray = append(tmpHashArray, GenerateHashFromJsonString(string(j)))
+			} 
+		
+			for len(hashArray) != 0 {
+				tmpHashArray = append(tmpHashArray, hashArray[len(hashArray)-1])
+				hashArray = hashArray[:len(hashArray)-1]
+			}
+
+		case []selftype.WesternMedicine:
+			for i := len(iType) - 1 ; i >= 0 ; i-- {
+		
+				informathion := iType[i]		
+		
+				for len(tmpHashArray) != (informathion.ID - 1) {
+					tmpHashArray = append(tmpHashArray, hashArray[len(hashArray)-1])
+					hashArray = hashArray[:len(hashArray)-1]
+				}
+				j, _ := json.Marshal(informathion)
+				tmpHashArray = append(tmpHashArray, GenerateHashFromJsonString(string(j)))
+			} 
+		
+			for len(hashArray) != 0 {
+				tmpHashArray = append(tmpHashArray, hashArray[len(hashArray)-1])
+				hashArray = hashArray[:len(hashArray)-1]
+			}
+	}
+
+	return GenerateMerkleTreeRoot(tmpHashArray)
 }

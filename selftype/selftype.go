@@ -11,12 +11,24 @@ type MedicineUsage struct {
 
 type MerkleTreeRequire struct {
 	MedicineUsages []MedicineUsage `json:"medicineUsages"`
+	WesternMedicines []WesternMedicine `json:"westernInfo"`
 	UserName string `json:"personName" example:"\u738b\u6625\u5b0c"`
 }
 
+type MedicineUsagesWithHashArray struct{
+	MedicineUsages []MedicineUsage `json:"medicineUsages"`
+	MedicineHashArray []string `json:"hashArrayMed"`
+}
+
+type WesternMedicineWithHashArray struct{
+	WesternMedicines []WesternMedicine `json:"westernInfo"`
+	WesternHashArray []string `json:"hashArrayWes"`
+}
+
 type VerifyMerkleTree struct {
-	MerkleTreeRequire
-	HashArray []string `json:"hashArray"`
+	MedicineUsagesWithHashArray MedicineUsagesWithHashArray `json:"Med"`
+	WesternMedicineWithHashArray WesternMedicineWithHashArray `json:"Wes"`
+	UserName string `json:"personName" example:"\u738b\u6625\u5b0c"`
 }
 
 type DiseaseInfo struct {
