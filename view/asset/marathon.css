@@ -114,8 +114,8 @@ body {
       font-size: 1.5em;
       line-height: 40px;
       font-weight: bold;
-      text-align: right;
-      color: rgba(255,255,255,.8);
+      text-align: center;
+      color: #000000;
     transition: all .3s ease-in-out;
   }
   

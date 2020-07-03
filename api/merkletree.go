@@ -112,7 +112,7 @@ func VerifyMerkleTreeRoot(c *gin.Context) {
 		
 		if userHashRoot[verifyMerkleTree.UserName] == service.GenerateMerkleTreeRoot(hashArray) {
 			shareResultStatus = true
-			shareResultMessage = append(shareResultMessage, "Merkle tree verify successful with user name: " + verifyMerkleTree.UserName)
+			shareResultMessage = append(shareResultMessage, "MerkleTree verify successful with user name: " + verifyMerkleTree.UserName)
 
 			c.JSON(http.StatusOK, gin.H{
 				"status": "success",
@@ -121,7 +121,7 @@ func VerifyMerkleTreeRoot(c *gin.Context) {
 
 		} else {
 			shareResultStatus = true
-			shareResultMessage = append(shareResultMessage, "Merkle tree verify failure with user name: " + verifyMerkleTree.UserName)
+			shareResultMessage = append(shareResultMessage, "MerkleTree verify failure with user name: " + verifyMerkleTree.UserName)
 
 			c.JSON(http.StatusOK, gin.H{
 				"status": "success",
