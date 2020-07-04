@@ -71,7 +71,7 @@ func GetEvent (c *gin.Context) {
 */
 	allEvent["第1屆 指南馬拉松"] = selftype.Event{
 		EventName: "第1屆 指南馬拉松",
-		EventInfo: "我們將從您的健康存摺加密處理後交給馬拉松中心進行第三方驗證 確定您是否符合馬拉松資格",
+		EventInfo: "您的資料將經過加密並交由我們驗證，以確定您是否符合馬拉松資格",
 		EventType: "zkrp",
 		EventRequired: append([]string{}, "西醫門診", "住院/手術資料"),
 		EventRequiredDetail: append([]string{}, "7天內無呼吸道症狀、無腹瀉症狀", "365天內無冠心病症狀、無貧血症狀、無高血壓症狀"),
@@ -79,9 +79,9 @@ func GetEvent (c *gin.Context) {
 		VarifyURL: "http://140.119.19.121:8080/verify",
 	}
 
-	allEvent["指南臨床試驗"] = selftype.Event{
-		EventName: "指南臨床試驗",
-		EventInfo: "指南臨床試驗 政府立案 字號 NCTXXXXXX",
+	allEvent["指南臨床試驗 政府立案 字號 NCTXXXXXX"] = selftype.Event{
+		EventName: "指南臨床試驗 政府立案 字號 NCTXXXXXX",
+		EventInfo: "我們需要您自主提供資料以方便進行藥物研究",
 		EventType: "merkletree",
 		EventRequired: append([]string{}, "自行選擇提供"),
 		EventRequiredDetail: append([]string{}, "無"),

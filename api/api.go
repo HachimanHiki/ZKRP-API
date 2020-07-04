@@ -97,7 +97,7 @@ func GetQRcode (c *gin.Context) {
 			allEvent = make(map[string]selftype.Event)
 		}
 		allEvent["第1屆 指南馬拉松"] = selftype.Event{}
-		allEvent["指南臨床試驗"] = selftype.Event{}
+		allEvent["指南臨床試驗 政府立案 字號 NCTXXXXXX"] = selftype.Event{}
 		//
 		if _, ok := allEvent[eventName]; ok {
 			
