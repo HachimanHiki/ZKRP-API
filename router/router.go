@@ -27,6 +27,7 @@ func InitRouter() {
     router.GET("/result/zkrp", api.GetZkrpResult)
     router.GET("/result/share", api.GetShareResult)
 
+    router.GET("account", api.GetAccount)
     //router.POST("/merkletree", api.PostMerkleTreeRoot)
     router.POST("/merkletree", api.VerifyMerkleTreeRoot)
     router.POST("/prove", api.NewProve)

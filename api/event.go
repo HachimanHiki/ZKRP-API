@@ -69,18 +69,20 @@ func GetEvent (c *gin.Context) {
 		RequireDays: 28,
 	}
 
-	allEvent["marathon"] = selftype.Event{
-		EventName: "marathon",
-		EventInfo: "強化主動防疫 我們需要您提供28天內住院與手術資料我們將從您的健康存摺加密處理後交給馬拉松中心進行第三方驗證 確定您是否符合馬拉松資格",
+	allEvent["第1屆 指南馬拉松"] = selftype.Event{
+		EventName: "第1屆 指南馬拉松",
+		EventInfo: "我們將從您的健康存摺加密處理後交給馬拉松中心進行第三方驗證 確定您是否符合馬拉松資格",
 		EventType: "zkrp",
+		EventRequired: append([]string{}, "西醫門診", "住院/手術資料"),
 		DiseaseInfo: append(diseaseInfoSlice, diseaseInfo),
 		VarifyURL: "http://140.119.19.121:8080/verify",
 	}
 
-	allEvent["share"] = selftype.Event{
-		EventName: "share",
-		EventInfo: "強化主動防疫 我們需要您提供28天內住院與手術資料我們將從您的健康存摺加密處理後交給馬拉松中心進行第三方驗證 確定您是否符合馬拉松資格",
+	allEvent["指南臨床試驗"] = selftype.Event{
+		EventName: "指南臨床試驗",
+		EventInfo: "字號 NCTXXXXXX",
 		EventType: "merkletree",
+		EventRequired: append([]string{}, "自行選擇提供"),
 		VarifyURL: "http://140.119.19.121:8080/verify",
 	}
 	//
