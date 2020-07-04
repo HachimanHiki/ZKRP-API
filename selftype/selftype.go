@@ -89,7 +89,8 @@ type Event struct {
 	EventInfo string `json:"eventInfo" example:"強化主動防疫 我們需要您提供28天內住院與手術資料我們將從您的健康存摺加密處理後交給馬拉松中心進行第三方驗證 確定您是否符合馬拉松資格"`
 	EventType string `json:"EventType" example:"zkrp"`
 	EventRequired []string `json:"eventRequired"`
-	DiseaseInfo []DiseaseInfo `json:"diseaseInfo"`
-	OperationInfo []OperationInfo `json:"operationInfo"`
+	EventRequiredDetail []string `json:"eventRequiredDetail"`
+	//DiseaseInfo []DiseaseInfo `json:"diseaseInfo"`
+	//OperationInfo []OperationInfo `json:"operationInfo"`
 	VarifyURL string `json:"varifyURL" example:"http://localhost:8080/verify"`
 }
