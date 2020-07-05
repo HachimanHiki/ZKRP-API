@@ -74,7 +74,7 @@ func GetEvent (c *gin.Context) {
 		EventInfo: "您的資料將經過加密並交由我們驗證，以確定您是否符合馬拉松資格",
 		EventType: "zkrp",
 		EventRequired: append([]string{}, "西醫門診", "住院 手術資料"),
-		EventRequiredDetail: append([]string{}, "7天內無呼吸道症狀、無腹瀉症狀", "365天內無冠心病症狀、無貧血症狀、無高血壓症狀"),
+		EventRequiredDetail: append([]string{}, "28天內無呼吸道症狀、腹瀉症狀、冠心病症狀、心臟衰竭症狀、貧血症狀、高血壓症狀"),
 		DiseaseInfo: append(diseaseInfoSlice, diseaseInfo),
 		VarifyURL: "http://140.119.19.121:8080/verify",
 	}
