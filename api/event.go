@@ -61,21 +61,21 @@ func GetEvent (c *gin.Context) {
 	if allEvent == nil {
 		allEvent = make(map[string]selftype.Event)
 	}
-/*
+
 	var diseaseInfoSlice []selftype.DiseaseInfo
 	diseaseInfo := selftype.DiseaseInfo {
 		DiseaseID: "R",
 		DiseaseName: "\u75f0\u7570\u5e38",
 		RequireDays: 28,
 	}
-*/
+
 	allEvent["第1屆 指南馬拉松"] = selftype.Event{
 		EventName: "第1屆 指南馬拉松",
 		EventInfo: "您的資料將經過加密並交由我們驗證，以確定您是否符合馬拉松資格",
 		EventType: "zkrp",
 		EventRequired: append([]string{}, "西醫門診", "住院 手術資料"),
 		EventRequiredDetail: append([]string{}, "7天內無呼吸道症狀、無腹瀉症狀", "365天內無冠心病症狀、無貧血症狀、無高血壓症狀"),
-		//DiseaseInfo: append(diseaseInfoSlice, diseaseInfo),
+		DiseaseInfo: append(diseaseInfoSlice, diseaseInfo),
 		VarifyURL: "http://140.119.19.121:8080/verify",
 	}
 

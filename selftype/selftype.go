@@ -90,7 +90,7 @@ type Event struct {
 	EventType string `json:"EventType" example:"zkrp"`
 	EventRequired []string `json:"eventRequired"`
 	EventRequiredDetail []string `json:"eventRequiredDetail"`
-	//DiseaseInfo []DiseaseInfo `json:"diseaseInfo"`
+	DiseaseInfo []DiseaseInfo `json:"diseaseInfo"`
 	//OperationInfo []OperationInfo `json:"operationInfo"`
 	VarifyURL string `json:"varifyURL" example:"http://localhost:8080/verify"`
 }
