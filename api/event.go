@@ -74,7 +74,7 @@ func GetEvent (c *gin.Context) {
 		EventInfo: "為了確保參與者的健康狀態，降低健康事件的發生風險，本活動參考ooooo建議，欲針對您的個人健康資料進行驗證，以瞭解您近期是否有以下不適參賽之疾病或症狀：",
 		EventType: "zkrp",
 		//EventRequired: append([]string{}, "西醫門診", "住院 手術資料"),
-		EventRequired: append([]string{}, "本活動需請您提供健康存摺內，過去28天內的健保西醫門診與住院資料。"),
+		EventRequired: append([]string{}, "健保西醫門診與住院資料。"),
 		EventRequiredDetail: append([]string{}, "28天內無呼吸道症狀、腹瀉症狀、冠心病症狀、心臟衰竭症狀、貧血症狀、高血壓症狀"),
 		DiseaseInfo: append(diseaseInfoSlice, diseaseInfo),
 		VarifyURL: "http://140.119.19.121:8080/verify",
@@ -82,10 +82,10 @@ func GetEvent (c *gin.Context) {
 
 	allEvent["指南臨床試驗 政府立案 字號 NCTXXXXXX"] = selftype.Event{
 		EventName: "指南臨床試驗 政府立案 字號 NCTXXXXXX",
-		EventInfo: "我們是指南大學研究團隊，正在進行「指南臨床試驗」，需要民眾自願提供資料協助試驗進行。我們的試驗已經審查通過，研究計畫通過編號 NCTXXXXXX。",
+		EventInfo: "我們是指南大學研究團隊，正在進行「指南臨床試驗」，需要民眾自願提供資料協助試驗進行。詳情可參閱政府研究計畫核定公告的網站：https://wwww.clinical-trail.edu.tw/test123",
 		EventType: "merkletree",
-		EventRequired: append([]string{}, "我們需要您提供您健康存摺內，108年的西醫門診與用藥紀錄作為研用的資料。"),
-		EventRequiredDetail: append([]string{}, "詳情可參閱政府研究計畫核定公告的網站： https://wwww.clinical-trail.edu.tw/test123"),
+		EventRequired: append([]string{}, "健保西醫門診與用藥紀錄"),
+		EventRequiredDetail: append([]string{}, "本活動需要您提供您健康存摺內，過去1年的健保西醫門診與用藥紀錄作為研究用的資料。"),
 		VarifyURL: "http://140.119.19.121:8080/verify",
 	}
 	//
