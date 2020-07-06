@@ -5,12 +5,14 @@
 #### 1. Direct Start
 
 ```
+$ ganache-cli -m "much repair shock carbon improve miss forget sock include bullet interest solution" --blockTime 5
 $ go run main.go
 ```
 
 #### 2. Compile and Start
 
 ```
+$ ganache-cli -m "much repair shock carbon improve miss forget sock include bullet interest solution" --blockTime 5
 $ go build .
 $ ./zkrpApi
 ```
