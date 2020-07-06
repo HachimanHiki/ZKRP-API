@@ -1,6 +1,8 @@
 pragma solidity ^0.4.24;
 
-contract Health {
+import "./Ownable.sol";
+
+contract Health is Ownable{
     string public commitment;
     string public merkleTreeRoot;
 
@@ -11,11 +13,11 @@ contract Health {
         merkleTreeRoot = m;
     }
 
-    function updateCommitment(string c) public {
+    function updateCommitment(string c) public onlyOwner{
         commitment = c;
     }
 
-    function updateMerkleTreeRoot(string m) public {
+    function updateMerkleTreeRoot(string m) public onlyOwner{
         merkleTreeRoot = m;
     }
 }
