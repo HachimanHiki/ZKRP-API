@@ -82,10 +82,10 @@ func GetEvent (c *gin.Context) {
 
 	allEvent["指南臨床試驗 政府立案 字號 NCTXXXXXX"] = selftype.Event{
 		EventName: "指南臨床試驗 政府立案 字號 NCTXXXXXX",
-		EventInfo: "我們需要您自主提供資料以方便進行藥物研究",
+		EventInfo: "我們是指南大學研究團隊，正在進行「指南臨床試驗」，需要民眾自願提供資料協助試驗進行。我們的試驗已經審查通過，研究計畫通過編號 NCTXXXXXX。",
 		EventType: "merkletree",
-		EventRequired: append([]string{}, "自行選擇提供"),
-		EventRequiredDetail: append([]string{}, "無"),
+		EventRequired: append([]string{}, "我們需要您提供您健康存摺內，108年的西醫門診與用藥紀錄作為研用的資料。"),
+		EventRequiredDetail: append([]string{}, "詳情可參閱政府研究計畫核定公告的網站： https://wwww.clinical-trail.edu.tw/test123"),
 		VarifyURL: "http://140.119.19.121:8080/verify",
 	}
 	//
