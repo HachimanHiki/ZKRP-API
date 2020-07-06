@@ -6,6 +6,7 @@ import (
 	"net/http"
 	"image/png"
 
+	"github.com/HachimanHiki/zkrpApi/service"
 	"github.com/boombuler/barcode"
 	"github.com/boombuler/barcode/qr"
 	"github.com/HachimanHiki/zkrpApi/selftype"
@@ -19,7 +20,35 @@ var (
 	zkrpResultMessage []string
 	shareResultStatus bool = false
 	shareResultMessage []string
+	contractAddress map[string]string
 )
+
+func init() {
+
+	if allEvent == nil {
+		contractAddress = make(map[string]string)
+	}
+
+	add, _ := service.DeployContract("f1b3f8e0d52caec13491368449ab8d90f3d222a3e485aa7f02591bbceb5efba5", 
+		"0x19be17213c2ee781defeef4abc2d6964f1418177f8d54418c55412e198eebf2107c6e8cc1a43e9be4e7f331f7b729e53a2e14e37aa874383628cf89be3cd0ef6", 
+		"d248f0355b955dad7d88be03cf279654bd8ebbbbc8d6302ae19ff34c26143eae")
+
+	contractAddress["\u738b\u6625\u5b0c"] = add
+
+	
+	add, _ = service.DeployContract("91821f9af458d612362136648fc8552a47d8289c0f25a8a1bf0860510332cef9", 
+		"0x159e049899d7b4e444459feb5e832c1d589b97f348ff7a37bd84d2cdc4b2bb5e653c3163346c4055f17d9d27c01016869a64bb6bb3a91e2558b8b3183d3f4720", 
+		"8aa08b98e39aacc3f4d3846a46e440789869ed6dc401ea1595bb69db11bbd8e6")
+
+	contractAddress["\u674e\u5c0f\u8c6a"] = add
+
+
+	add, _ = service.DeployContract("bb32062807c162a5243dc9bcf21d8114cb636c376596e1cf2895ec9e5e3e0a68", 
+		"0x1edbe504d08a8da27424f7815dc6bfb0ff18746fabc38f0b7ec05915da0d9b302cf345a6f4523163ac3254155d45329f1f5c8ac835b2fd558db2f5bd543aefb8", 
+		"724a9dbd73a2c83a4ec8fb1244e2661e5acd77963ebbfdad65df08f3260e6a21")
+	
+	contractAddress["\u5f35\u5fd7\u660e"] = add
+}
 
 // NotFound godoc
 func NotFound(c *gin.Context) {

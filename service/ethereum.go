@@ -3,7 +3,6 @@ package service
 import (
 	"context"
 	"crypto/ecdsa"
-	"fmt"
 	"log"
 	"math/big"
 
@@ -73,10 +72,9 @@ func GetCommitment(add string) (string, error){
 	instance, err := health.NewHealth(address, client)
 	if err != nil {
 		log.Fatal(err)
-		fmt.Println(err)
 	}
 
-	return instance.Commitment(nil)
+	return instance.Commitment(&bind.CallOpts{})
 }
 
 func GetMerkleTreeRoot(add string) (string, error){
@@ -92,5 +90,5 @@ func GetMerkleTreeRoot(add string) (string, error){
 		log.Fatal(err)
 	}
 
-	return instance.MerkleTreeRoot(nil)
+	return instance.MerkleTreeRoot(&bind.CallOpts{})
 }

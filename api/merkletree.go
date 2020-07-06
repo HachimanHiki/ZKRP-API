@@ -88,16 +88,20 @@ func VerifyMerkleTreeRoot(c *gin.Context) {
 		userHashRoot["\u674e\u5c0f\u8c6a"] = "fca3a82e4f649975626bb40a45442c381b2ee9f38699e6ff0af03c649b90d8a7"
 		userHashRoot["\u5f35\u5fd7\u660e"] = "40a388b578be1a7443ba1258ac761f09bfd821aebb694e5109ee9035c30b3fef"
 		*/
-		// western
-		/*
+		/* western
 		userHashRoot["\u738b\u6625\u5b0c"] = "ab254dcc9954682081ee568367ad62c4e6348574f510eed0a6efdabc4852c833"
 		userHashRoot["\u674e\u5c0f\u8c6a"] = "01a39831ceb9d6a01a4a84a5b4d09abc8fd4eb1411e8fd460d616ce2ce1d7fae"
 		userHashRoot["\u5f35\u5fd7\u660e"] = "2c25458e174351f4220f572a633f97e2970541c3d5659a11cab8e682858d3a96"
 		*/
-		// total
+		/* total
 		userHashRoot["\u738b\u6625\u5b0c"] = "d248f0355b955dad7d88be03cf279654bd8ebbbbc8d6302ae19ff34c26143eae"
 		userHashRoot["\u674e\u5c0f\u8c6a"] = "8aa08b98e39aacc3f4d3846a46e440789869ed6dc401ea1595bb69db11bbd8e6"
 		userHashRoot["\u5f35\u5fd7\u660e"] = "724a9dbd73a2c83a4ec8fb1244e2661e5acd77963ebbfdad65df08f3260e6a21"
+		*/
+
+		merkleTreeRoot, _ := service.GetMerkleTreeRoot(contractAddress[verifyMerkleTree.UserName])
+		userHashRoot[verifyMerkleTree.UserName] = merkleTreeRoot
+		fmt.Println(userHashRoot[verifyMerkleTree.UserName])
 		//
 
 		var hashArray []string
