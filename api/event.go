@@ -85,7 +85,7 @@ func GetEvent (c *gin.Context) {
 		EventInfo: "我們是指南大學研究團隊，正在進行「指南臨床試驗」，需要民眾自願提供健保西醫門診與用藥紀錄協助試驗進行。詳情可參閱政府研究計畫核定公告的網站：",
 		EventType: "merkletree",
 		EventRequired: append([]string{}, "健保西醫門診與用藥紀錄"),
-		EventRequiredDetail: append([]string{}, "本活動需要您提供您健康存摺內，過去1年的健保西醫門診與用藥紀錄作為研究用的資料。"),
+		EventRequiredDetail: append([]string{}, "本活動需要您提供您健康存摺內，108年的健保西醫門診與用藥紀錄作為研究用的資料。"),
 		VarifyURL: "http://140.119.19.121:8080/verify",
 	}
 	//
