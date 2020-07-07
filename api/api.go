@@ -15,7 +15,6 @@ import (
 
 var (
 	allEvent map[string]selftype.Event
-	userHashRoot map[string]string
 	zkrpResultStatus bool = false
 	zkrpResultMessage []string
 	shareResultStatus bool = false

@@ -36,10 +36,6 @@ func PostMerkleTreeRoot(c *gin.Context) {
 			j, _ := json.Marshal(medicineUsage)
 			hashArray2 = append(hashArray2, service.GenerateHashFromJsonString(string(j)))
 		}
-
-		if userHashRoot == nil {
-			userHashRoot = make(map[string]string)
-		}
 		
 		hashArray = append(hashArray, service.GenerateMerkleTreeRoot(hashArray1))
 		hashArray = append(hashArray, service.GenerateMerkleTreeRoot(hashArray2))
@@ -49,12 +45,10 @@ func PostMerkleTreeRoot(c *gin.Context) {
 		fmt.Println(hashArray)
 
 		merkleTreeRoot := service.GenerateMerkleTreeRoot(hashArray)
-		//userHashRoot[merkleTreeRequire.UserName] = service.GenerateMerkleTreeRoot(hashArray)
 		service.UpdateMerkleTree(contractAddress[merkleTreeRequire.UserName], merkleTreeRoot, userPrivateKey[merkleTreeRequire.UserName])
 		
 		c.JSON(http.StatusOK, gin.H{
 			"status": "success",
-			//"message": userHashRoot[merkleTreeRequire.UserName],
 			"message": merkleTreeRoot,
 		})
 
@@ -83,9 +77,6 @@ func VerifyMerkleTreeRoot(c *gin.Context) {
 
 	if c.BindJSON(&verifyMerkleTree) == nil {
 		// for demo use
-		if userHashRoot == nil {
-			userHashRoot = make(map[string]string)
-		}
 		/* medicine
 		userHashRoot["\u738b\u6625\u5b0c"] = "144395288b617a54e0eda5706c41857ecbb39b113bad83515c01fef20a6b3eb6"
 		userHashRoot["\u674e\u5c0f\u8c6a"] = "fca3a82e4f649975626bb40a45442c381b2ee9f38699e6ff0af03c649b90d8a7"
@@ -101,10 +92,7 @@ func VerifyMerkleTreeRoot(c *gin.Context) {
 		userHashRoot["\u674e\u5c0f\u8c6a"] = "8aa08b98e39aacc3f4d3846a46e440789869ed6dc401ea1595bb69db11bbd8e6"
 		userHashRoot["\u5f35\u5fd7\u660e"] = "724a9dbd73a2c83a4ec8fb1244e2661e5acd77963ebbfdad65df08f3260e6a21"
 		*/
-
 		merkleTreeRoot, _ := service.GetMerkleTreeRoot(contractAddress[verifyMerkleTree.UserName])
-		userHashRoot[verifyMerkleTree.UserName] = merkleTreeRoot
-		fmt.Println(userHashRoot[verifyMerkleTree.UserName])
 		//
 
 		var hashArray []string
@@ -117,7 +105,7 @@ func VerifyMerkleTreeRoot(c *gin.Context) {
 		hashArray = append(hashArray, service.GenerateHashFromStructAndHash(verifyMerkleTree.MedicineUsagesWithHashArray.MedicineUsages, verifyMerkleTree.MedicineUsagesWithHashArray.MedicineHashArray))
 		hashArray = append(hashArray, service.GenerateHashFromStructAndHash(verifyMerkleTree.WesternMedicineWithHashArray.WesternMedicines, verifyMerkleTree.WesternMedicineWithHashArray.WesternHashArray))
 		
-		if userHashRoot[verifyMerkleTree.UserName] == service.GenerateMerkleTreeRoot(hashArray) {
+		if merkleTreeRoot == service.GenerateMerkleTreeRoot(hashArray) {
 			shareResultStatus = true
 			shareResultMessage = append(shareResultMessage, "MerkleTree verify successful with user name: " + verifyMerkleTree.UserName)
 
