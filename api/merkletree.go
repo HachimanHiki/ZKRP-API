@@ -50,7 +50,7 @@ func PostMerkleTreeRoot(c *gin.Context) {
 
 		merkleTreeRoot := service.GenerateMerkleTreeRoot(hashArray)
 		//userHashRoot[merkleTreeRequire.UserName] = service.GenerateMerkleTreeRoot(hashArray)
-		service.UpdateMerkleTree(contractAddress[merkleTreeRequire.UserName], merkleTreeRoot, "f1b3f8e0d52caec13491368449ab8d90f3d222a3e485aa7f02591bbceb5efba5")
+		service.UpdateMerkleTree(contractAddress[merkleTreeRequire.UserName], merkleTreeRoot, userPrivateKey[merkleTreeRequire.UserName])
 		
 		c.JSON(http.StatusOK, gin.H{
 			"status": "success",
