@@ -127,17 +127,7 @@ func PostVerify(c *gin.Context) {
 	verify.Commitment = "0x100b92ff311c1f05dfbe31dbcd8f416245bb0ab7bd800afe7ecc402a5c2480fc4ee9f329d7d7ddb8ddab7f99fb25e3f439144046782d95795bf8c0726a24c3ec"
 
 	if c.BindJSON(&verify) == nil {
-		/*
-		if verify.UserName == "\u738b\u6625\u5b0c" {
-			verify.Commitment = "0x19be17213c2ee781defeef4abc2d6964f1418177f8d54418c55412e198eebf2107c6e8cc1a43e9be4e7f331f7b729e53a2e14e37aa874383628cf89be3cd0ef6"
 
-		} else if verify.UserName == "\u674e\u5c0f\u8c6a" {
-			verify.Commitment = "0x159e049899d7b4e444459feb5e832c1d589b97f348ff7a37bd84d2cdc4b2bb5e653c3163346c4055f17d9d27c01016869a64bb6bb3a91e2558b8b3183d3f4720"
-
-		} else {
-			verify.Commitment = "0x1edbe504d08a8da27424f7815dc6bfb0ff18746fabc38f0b7ec05915da0d9b302cf345a6f4523163ac3254155d45329f1f5c8ac835b2fd558db2f5bd543aefb8"
-		}
-		*/
 		verify.Commitment, _ = service.GetCommitment(contractAddress[verify.UserName])
 
 		const layout = "20060102" // time format
