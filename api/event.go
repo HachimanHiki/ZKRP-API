@@ -75,14 +75,14 @@ func GetEvent (c *gin.Context) {
 		EventType: "zkrp",
 		//EventRequired: append([]string{}, "西醫門診", "住院 手術資料"),
 		EventRequired: append([]string{}, "健保西醫門診與住院資料。"),
-		EventRequiredDetail: append([]string{}, "28天內無呼吸道症狀、腹瀉症狀、冠心病症狀、心臟衰竭症狀、貧血症狀、高血壓症狀"),
+		EventRequiredDetail: append([]string{}, "28天內無呼吸道症狀、腹瀉、冠心病、心臟衰竭、貧血、高血壓"),
 		DiseaseInfo: append(diseaseInfoSlice, diseaseInfo),
 		VarifyURL: "http://140.119.19.121:8080/verify",
 	}
 
 	allEvent["指南臨床試驗 政府立案 字號 NCTXXXXXX"] = selftype.Event{
-		EventName: "指南臨床試驗 政府立案 字號 NCTXXXXXX",
-		EventInfo: "我們是指南大學研究團隊，正在進行「指南臨床試驗」，需要民眾自願提供健保西醫門診與用藥紀錄協助試驗進行。詳情可參閱政府研究計畫核定公告的網站：",
+		EventName: "指南藥品臨床試驗(試驗編號：20200713PHT)",
+		EventInfo: "您好，我們是指南醫學大學研究團隊，目前正在進行「以Remdesivir治療病毒性肺炎之療效評估」研究，主要目的是評估Remdesivir藥物治療病毒性肺炎的效果與有效劑量，瞭解長時間使用的安全及風險。因此，我們希望徵求民眾自願提供「健保西醫門診」與「用藥紀錄」，協助本試驗進行。有關本藥品臨床試驗的詳細資訊，您可以至@臺灣臨床試驗資訊網站查詢」：",
 		EventType: "merkletree",
 		EventRequired: append([]string{}, "健保西醫門診與用藥紀錄"),
 		EventRequiredDetail: append([]string{}, "本活動需要您提供您健康存摺內，108年的健保西醫門診與用藥紀錄作為研究用的資料。"),
